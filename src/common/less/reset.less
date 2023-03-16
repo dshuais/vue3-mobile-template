@@ -1,0 +1,220 @@
+:not(input):not(textarea) {
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+[v-cloak] {
+  display: none;
+}
+.van-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+html {
+  font-size: (100vw / 750) * 100;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  overflow: hidden;
+  background: transparent;
+  font-family: '微软雅黑', 'Microsoft YaHei', Tahoma, Arial, sans-serif;
+}
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+}
+#app {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  // overflow: hidden;
+  background-color: #fff;
+  & .wrap {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.full-page {
+  width: 100%;
+  height: 100%;
+  min-height: 13.34rem;
+  overflow: hidden;
+}
+.scroll-page {
+  width: 100%;
+  overflow: hidden;
+}
+button {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+}
+// 去除iPhone中默认的input样式
+input[type='submit'],
+input[type='reset'],
+input[type='button'],
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+input {
+  font-family: '微软雅黑', 'Microsoft YaHei', Tahoma, Arial, sans-serif;
+  -webkit-appearance: none;
+  resize: none;
+  border-radius: 0;
+}
+body,
+div,
+ul,
+li,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select,
+p,
+dl,
+dt,
+dd,
+a,
+img,
+button,
+form,
+table,
+th,
+tr,
+td,
+tbody,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+// 设置HTML5元素为块
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+// 初始化
+body,
+div,
+ul,
+li,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea,
+select,
+p,
+dl,
+dt,
+dd,
+a,
+img,
+button,
+form,
+table,
+th,
+tr,
+td,
+tbody,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  font-family: '微软雅黑', Microsoft YaHei, Tahoma, Arial, sans-serif;
+  border: none;
+  box-sizing: border-box;
+}
+em,
+// i {
+//   font-style: normal;
+// }
+// strong {
+//   font-weight: normal;
+// }
+a {
+  text-decoration: none;
+  color: #333;
+  font-family: '微软雅黑', Microsoft YaHei, Tahoma, Arial, sans-serif;
+}
+a:hover {
+  color: transparent;
+  text-decoration: none;
+}
+ul,
+ol {
+  list-style: none;
+}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-size: 100%;
+//   font-family: 'Microsoft YaHei';
+// }
+img {
+  border: none;
+}
+[v-cloak] {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+.van-popup {
+  width: 100%;
+  min-width: 100%;
+  height: 100vh;
+  background: transparent;
+}
+
