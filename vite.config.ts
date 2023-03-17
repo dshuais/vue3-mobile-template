@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-16 20:07:23
+ * @LastEditTime: 2023-03-18 01:00:35
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -13,21 +13,23 @@ import Component from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import viteCompression from 'vite-plugin-compression'
 import viteImagemin from 'vite-plugin-imagemin'
+import legacyPlugin from '@vitejs/plugin-legacy'
+import visualizer from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
-export default defineConfig(({mode, command}) => {
-  const env:Record<string, string> = loadEnv(mode, process.cwd(), '') // 环境变量
-  const isProd:boolean = env.VITE_APP_ENV === 'production'
-  const isDev:boolean = env.VITE_APP_ENV === 'development'
-  const isSit:boolean = env.VITE_APP_ENV === 'sit'
-  const isUat:boolean = env.VITE_APP_ENV === 'uat'
+export default defineConfig(({ mode, command }) => {
+  const env: Record<string, string> = loadEnv(mode, process.cwd(), '') // 环境变量
+  const isProd: boolean = env.VITE_APP_ENV === 'production'
+  const isDev: boolean = env.VITE_APP_ENV === 'development'
+  const isSit: boolean = env.VITE_APP_ENV === 'sit'
+  const isUat: boolean = env.VITE_APP_ENV === 'uat'
 
   // 非本地环境删除dist文件夹
-  if(!isDev) {
+  if (!isDev) {
     const fs = require('fs')
-    function delDir(path:string) {
-      let files:string[] = []
-      if(fs.existsSync(path)) {
+    function delDir(path: string) {
+      let files: string[] = []
+      if (fs.existsSync(path)) {
         files = fs.readdirSync(path)
         files.forEach(file => {
           let curPath = path + '/' + file
@@ -51,8 +53,8 @@ export default defineConfig(({mode, command}) => {
   }
 
   // 区分测试和生产的打包环境
-  let publicPath:string = ''
-  let outputDir:string = ''
+  let publicPath: string = ''
+  let outputDir: string = ''
 
   // 测试使用dist打包
   if (isSit) {
@@ -63,13 +65,13 @@ export default defineConfig(({mode, command}) => {
   if (isProd || isUat) {
     // 前端打包解决缓存问题
     const formatDate = () => {
-      const time:Date = new Date()
-      let y:string = time.getFullYear().toString()
-      let m:string = (time.getMonth() + 1).toString()
-      let d:string = time.getDate().toString()
-      let h:string = time.getHours().toString()
-      let mm:string = time.getMinutes().toString()
-      let ss:string = time.getSeconds().toString()
+      const time: Date = new Date()
+      let y: string = time.getFullYear().toString()
+      let m: string = (time.getMonth() + 1).toString()
+      let d: string = time.getDate().toString()
+      let h: string = time.getHours().toString()
+      let mm: string = time.getMinutes().toString()
+      let ss: string = time.getSeconds().toString()
       m = m < '10' ? `0${m}` : m
       d = d < '10' ? `0${d}` : d
       h = h < '10' ? `0${h}` : h
@@ -85,18 +87,18 @@ export default defineConfig(({mode, command}) => {
       outputDir = dirName
     }
   }
-  
+
   return {
     // root: process.cwd(), // 项目根目录（index.html 文件所在的位置） 默认process.cwd()
     base: publicPath, // 默认/ 配置文件的根目录为相对路径
     // publicDir: 'public', // 静态资源服务的文件夹 默认public
     plugins: [
       vue(),
-  
+
       // 插件自动按需引入
       AutoImport({
         dts: 'src/auto-imports.d.ts', // 会在根目录生成auto-imports.d.ts
-        include: [/\.[tj]sx?$/,  /\.vue$/], // 匹配的文件，也就是哪些后缀的文件需要自动引入
+        include: [/\.[tj]sx?$/, /\.vue$/], // 匹配的文件，也就是哪些后缀的文件需要自动引入
         imports: ["vue", "pinia", "vue-router"], // 自动引入的api从这里找
         eslintrc: { // 根据项目情况配置eslintrc，默认是不开启的
           enabled: true, // @default false
@@ -106,7 +108,7 @@ export default defineConfig(({mode, command}) => {
           // globalsPropValue: true, // @default true 可设置 boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
         }
       }),
-  
+
       // 组件自动按需引入
       Component({
         dts: 'src/components.d.ts',
@@ -153,7 +155,16 @@ export default defineConfig(({mode, command}) => {
             }
           ]
         }
-      })
+      }),
+
+      // 兼容低版本浏览器  ==> 使用兼容,资源包会很大
+      // legacyPlugin({
+      //   targets: ['android 4', 'ios 8', 'chrome 52', 'ie 11'], // 需要兼容的目标列表，可以设置多个
+      //   additionalLegacyPolyfills: ['regenerator-runtime/runtime'] // 面向IE11时需要此插件
+      // }),
+
+      // 打包后展示性能面板
+      isProd && visualizer({ open: true }) // 自动开启分析页面
     ],
     build: {
       outDir: outputDir, // 指定输出路径 默认dist
@@ -175,7 +186,7 @@ export default defineConfig(({mode, command}) => {
           entryFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
           manualChunks(id) { // 超大静态资源拆分
-            if(id.includes('node_modules')) return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            if (id.includes('node_modules')) return id.toString().split('node_modules/')[1].split('/')[0].toString()
             // 'popups': ['./src/components/Popups/']
           }
         }
@@ -201,7 +212,7 @@ export default defineConfig(({mode, command}) => {
         '/api': {
           target: env.VITE_APP_SERVE_URl,
           changeOrigin: true,
-          rewrite: (path:string) => path.replace(/^\/api/, '')
+          rewrite: (path: string) => path.replace(/^\/api/, '')
         }
       }
     },
