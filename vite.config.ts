@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-18 17:30:54
+ * @LastEditTime: 2023-03-18 22:17:15
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -157,7 +157,7 @@ export default defineConfig(({ mode, command }) => {
         }
       }),
 
-      // 兼容低版本浏览器  ==> 使用兼容,资源包会很大
+      // 兼容低版本浏览器  ==> 使用兼容,资源包比较大
       // legacyPlugin({
       //   targets: ['android 4', 'ios 8', 'chrome 52', 'ie 11'], // 需要兼容的目标列表，可以设置多个
       //   additionalLegacyPolyfills: ['regenerator-runtime/runtime'] // 面向IE11时需要此插件

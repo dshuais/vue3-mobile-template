@@ -13,8 +13,18 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
   },
-  "include": ["src/auto-imports.d.ts"],
+  "include": [
+    "src/auto-imports.d.ts"
+  ],
+  // 因为自动获取静态图片列表需要使用ts-node运行,解决可能会有的报错
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
 }
