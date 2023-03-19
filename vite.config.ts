@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-18 22:17:15
+ * @LastEditTime: 2023-03-19 19:09:28
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'

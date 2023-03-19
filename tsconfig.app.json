@@ -1,13 +1,26 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/auto-imports.d.ts"],
-  "exclude": ["src/**/__tests__/*"],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/auto-imports.d.ts"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
+    "types": [
+      "node"
+    ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "preserveValueImports": false, // 解决router内RouteRecordRaw报错: 同时启用了 "preserveValueImports" 和 "isolatedModules" 时，必须使用仅类型导入进行导入
+    "suppressImplicitAnyIndexErrors": true, // 解决any|string...等不能用于索引的提示
   }
 }
