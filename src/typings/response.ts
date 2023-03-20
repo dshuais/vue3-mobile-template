@@ -2,8 +2,8 @@
  * @Author: dushuai
  * @Date: 2023-03-19 22:08:30
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-19 23:08:21
- * @Description: 接口response类型文件
+ * @LastEditTime: 2023-03-20 20:52:03
+ * @Description: 接口response data类型文件
  */
 
 /** response */

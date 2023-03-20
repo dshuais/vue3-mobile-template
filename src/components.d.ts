@@ -13,7 +13,5 @@ declare module '@vue/runtime-core' {
     PopBase: typeof import('./components/Popups/PopBase.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    VanButton: typeof import('vant/es')['Button']
-    VanPopup: typeof import('vant/es')['Popup']
   }
 }
