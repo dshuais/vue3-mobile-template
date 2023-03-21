@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-21 16:31:36
+ * @LastEditTime: 2023-03-21 16:54:06
  * @description: 框架说明
 -->
 # 项目名称
@@ -30,7 +30,7 @@
 │  └─assets            	   存放应用引用的本地静态资源（如图片、序列帧等）的目录
 │  └─common            	   公共文件
 │     └─style            	 公共样式文件目录
-|     └─ts                 公共工具类函数的目录
+|     └─ts                 公共函数的目录
 │  └─components            符合vue组件规范的组件目录
 │     └─BaseComponents     基础组件目录
 │     └─Popups             弹窗组件目录
@@ -38,7 +38,11 @@
 │  └─hooks                 抽离hooks的文件目录
 │  └─router                路由文件
 │  └─stores                状态管理仓库（pinia）文件目录
+|     └─app.ts             存放状态state的文件
+|     └─appActions.ts      存放操作状态方法action的文件
 │  └─typings               ts类型定义文件目录
+|     └─response.ts        请求的response.data.data的数据结构类型定义文件
+│  └─utils                 常用的工具类函数文件目录
 │  └─views                 路由对应vue文件目录
 |     └─components         抽分页面组件文件目录
 │  └─App.vue               App根文件
