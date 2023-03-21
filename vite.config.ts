@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-19 19:09:28
+ * @LastEditTime: 2023-03-20 09:54:40
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -165,8 +165,8 @@ export default defineConfig(({ mode, command }) => {
 
       // 打包后展示性能面板
       isProd && visualizer({
-        open: true,
-      }) // 自动开启分析页面
+        open: true, // 自动开启分析页面
+      })
     ],
     build: {
       outDir: outputDir, // 指定输出路径 默认dist
