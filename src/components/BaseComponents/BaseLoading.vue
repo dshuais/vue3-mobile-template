@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-15 12:09:17
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-19 23:09:00
+ * @LastEditTime: 2023-03-20 22:49:33
  * @description: BaseLoading图片预加载
 -->
 <script setup lang="ts">
@@ -16,7 +16,7 @@ const progress = ref<number>(0); // 加载进度
 const imgListLength = ref<number>(0); // 图片数组长度
 
 const progressInt = computed<number>( // 进度条
-  () => (progress.value * 100) / imgListLength.value || 100
+  () => (progress.value * 100) / imgListLength.value || 0
 );
 
 // 加载图片
@@ -45,7 +45,9 @@ const handleLoadImg = () => {
         const oImg = new Image();
         oImg.addEventListener("load", imgLoaded);
         oImg.addEventListener("error", imgLoaded);
-        oImg.src = require(`@/assets/img/${imgUrl}`); // 无序加载，并发下载图片
+        console.log('图', imgUrl, new URL(`../../assets/img/${imgUrl}`, import.meta.url).href)
+        // 无序加载，并发下载图片 注意要使用相对路径
+        oImg.src = new URL(`../../assets/img/${imgUrl}`, import.meta.url).href
         // oImg.src = require(`@/assets/img/${imgUrlArr[loadedCount]}`) // 有序加载，一张一张加载
       });
     };
@@ -119,6 +121,7 @@ const handleLoadNetworkImg = () => {
 
 // 禁止触摸
 const noTouch = (dom: HTMLElement) => {
+  if (!dom) return
   dom.addEventListener("touchmove", (event) => event.preventDefault(), false);
 };
 
@@ -126,7 +129,9 @@ onMounted(() => {
   noTouch(loading.value as HTMLElement);
 });
 
-defineExpose({});
+defineExpose({
+  handleLoadImg
+});
 </script>
 
 <template>
@@ -153,6 +158,7 @@ defineExpose({});
   flex-direction: column;
   background-color: #feead5;
   overflow-y: hidden;
+
   .text {
     top: 500px;
     width: 100%;
@@ -160,12 +166,14 @@ defineExpose({});
     text-align: center;
     font-size: 25px;
   }
+
   .progress {
     position: relative;
     width: 500px;
     height: 20px;
     border-radius: 50px;
     overflow: hidden;
+
     .inner {
       position: absolute;
       width: 100%;

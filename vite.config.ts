@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-20 09:54:40
+ * @LastEditTime: 2023-03-21 14:15:38
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -23,6 +23,7 @@ export default defineConfig(({ mode, command }) => {
   const isDev: boolean = env.VITE_APP_ENV === 'development'
   const isSit: boolean = env.VITE_APP_ENV === 'sit'
   const isUat: boolean = env.VITE_APP_ENV === 'uat'
+  const isHideLog: boolean = env.VITE_APP_LOG === 'true'
 
   // 非本地环境删除dist文件夹
   if (!isDev) {
@@ -178,8 +179,8 @@ export default defineConfig(({ mode, command }) => {
       terserOptions: {
         compress: {
           // 生产环境时移除console.log调试代码 生产环境时移除
-          drop_console: isProd,
-          drop_debugger: isProd
+          drop_console: isHideLog,
+          drop_debugger: isHideLog
         }
       },
       rollupOptions: {
