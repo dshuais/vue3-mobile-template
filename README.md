@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-21 16:54:06
+ * @LastEditTime: 2023-03-21 16:58:27
  * @description: 框架说明
 -->
 # 项目名称
@@ -54,6 +54,8 @@
 |─.eslintrc.cjs            ESLint规则
 │─env.d.ts
 │─index.html
+│─package-lock.json
+│─package.json
 ├─README.md                项目信息
 ├─tsconfig.json            ts配置文件
 ├─tsconfig.app.json        ts配置文件，会覆盖tsconfig
