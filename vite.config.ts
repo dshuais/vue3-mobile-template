@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-21 14:15:38
+ * @LastEditTime: 2023-03-21 15:39:32
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -225,7 +225,7 @@ export default defineConfig(({ mode, command }) => {
       preprocessorOptions: {
         less: {
           charset: false,
-          additionalData: '@import "./src/assets/less/global.less";'
+          additionalData: '@import "./src/assets/style/global.less";'
         }
       },
       // px 转 rem
