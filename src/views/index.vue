@@ -16,6 +16,7 @@ const showPage = ref<boolean>(false); // 页面的展示状态
 const refLoading = ref<ComponentInstance['BaseLoading']>()
 const isPreProduction = computed<boolean>(() => import.meta.env.VITE_APP_PRE_PRODUCTION === 'true') // 预生产
 const isDevEnv = computed<boolean>(() => import.meta.env.VITE_NODE_ENV === 'development') // 本地
+const isMpbankEnv = computed<boolean>(() => navigator.userAgent.toLowerCase().match(/MPBank/i)?.[0] === 'mpbank') // 招行
 
 // 初始化
 const hanleInit = () => {
@@ -53,8 +54,6 @@ watchEffect(() => {
 })
 
 onMounted(() => {
-  console.log('navigator', navigator);
-  console.log('sss', navigator.userAgent.toLowerCase().match(/MPBank/i));
 })
 
 </script>

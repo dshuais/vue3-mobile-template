@@ -16,9 +16,10 @@
 
 ## 提示
 
-1. `.env.development`、`.env.sit`、` .env.uat`、`.env.production` 需要修改为项目对应环境的配置
-2. `auto-imports.d.ts`、`components.d.ts` 为按需加载（vue、vue-router、pinia、components下组件）自动生成文件，请勿修改且在代码内不要重复导入
-3. `node_modules` 、`mobile` 等非源码文件勿提交到SVN/git，可添加到SVN/git的ignore/.gitignore列表中
+1. 推荐使用`cnpm install`安装依赖，因`vite-plugin-imagemin`等有些包在国内不太好安装
+2. `.env.development`、`.env.sit`、` .env.uat`、`.env.production` 需要修改为项目对应环境的配置
+3. `auto-imports.d.ts`、`components.d.ts` 为按需加载（vue、vue-router、pinia、components下组件）自动生成文件，请勿修改且在代码内不要重复导入
+4. `node_modules` 、`mobile` 等非源码文件勿提交到SVN/git，可添加到SVN/git的ignore/.gitignore列表中
 
 ## 目录结构
 
@@ -67,3 +68,11 @@
 ├─vite.config.ts                  vite配置
 └─vitest.config.ts
 ```
+
+## 环境打包等命令
+
+npm run dev    本地启动项目
+npm run sit    测试环境打包
+npm run uat    预生产环境打包
+npm run prod   生成环境打包
+npm run getImg 自动加载assets/img/下静态图片（图片懒加载使用），环境打包命令会自动执行,无需重复执行
