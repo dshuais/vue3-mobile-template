@@ -72,7 +72,11 @@
 ## 环境打包等命令
 
 npm run dev    本地启动项目
+
 npm run sit    测试环境打包
+
 npm run uat    预生产环境打包
+
 npm run prod   生成环境打包
+
 npm run getImg 自动加载assets/img/下静态图片（图片懒加载使用），环境打包命令会自动执行,无需重复执行
