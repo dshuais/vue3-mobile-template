@@ -4,7 +4,9 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue",
-    "src/auto-imports.d.ts"
+    "src/auto-imports.d.ts",
+    "src/components.d.ts",
+    "src/componentInstance.d.ts"
   ],
   "exclude": [
     "src/**/__tests__/*"

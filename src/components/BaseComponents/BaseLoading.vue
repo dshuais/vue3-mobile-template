@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-15 12:09:17
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-20 22:49:33
+ * @LastEditTime: 2023-03-22 14:13:53
  * @description: BaseLoading图片预加载
 -->
 <script setup lang="ts">
@@ -45,7 +45,7 @@ const handleLoadImg = () => {
         const oImg = new Image();
         oImg.addEventListener("load", imgLoaded);
         oImg.addEventListener("error", imgLoaded);
-        console.log('图', imgUrl, new URL(`../../assets/img/${imgUrl}`, import.meta.url).href)
+        // console.log('图', imgUrl, new URL(`../../assets/img/${imgUrl}`, import.meta.url).href)
         // 无序加载，并发下载图片 注意要使用相对路径
         oImg.src = new URL(`../../assets/img/${imgUrl}`, import.meta.url).href
         // oImg.src = require(`@/assets/img/${imgUrlArr[loadedCount]}`) // 有序加载，一张一张加载
