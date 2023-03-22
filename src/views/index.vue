@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-22 16:59:09
+ * @LastEditTime: 2023-03-22 18:00:56
  * @description: Index
 -->
 <script setup lang="ts">
@@ -14,6 +14,8 @@ const appStore = useAppStore(),
 
 const showPage = ref<boolean>(false); // 页面的展示状态
 const refLoading = ref<ComponentInstance['BaseLoading']>()
+const isPreProduction = computed<boolean>(() => import.meta.env.VITE_APP_PRE_PRODUCTION === 'true') // 预生产
+const isDevEnv = computed<boolean>(() => import.meta.env.VITE_NODE_ENV === 'development') // 本地
 
 // 初始化
 const hanleInit = () => {
@@ -51,7 +53,8 @@ watchEffect(() => {
 })
 
 onMounted(() => {
-
+  console.log('navigator', navigator);
+  console.log('sss', navigator.userAgent.toLowerCase().match(/MPBank/i));
 })
 
 </script>
@@ -59,7 +62,10 @@ onMounted(() => {
   <BaseLoading ref="refLoading" />
 
   <transition name="faderouter" mode="out-in">
-    <div class="container" v-if="showPage">123</div>
+    <div class="container" v-if="showPage">
+      <BaseNoticeBar v-if="isPreProduction" />
+      123
+    </div>
   </transition>
 </template>
 
