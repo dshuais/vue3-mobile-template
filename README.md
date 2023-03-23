@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-22 17:08:25
+ * @LastEditTime: 2023-03-23 16:41:03
  * @description: 框架说明
 -->
 # 项目名称
@@ -56,7 +56,7 @@
 |─.env.xxx              	        环境变量配置
 |─.eslintrc-auto-import           自定义按需加载api文件，配置项与auto-imports.d.ts相对
 |─.eslintrc.cjs                   ESLint规则
-│─env.d.ts
+│─env.d.ts                        自定义npm上没有声明文件包的声明文件
 │─index.html
 │─package-lock.json
 │─package.json

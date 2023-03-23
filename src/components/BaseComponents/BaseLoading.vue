@@ -2,11 +2,11 @@
  * @Author: dushuai
  * @Date: 2023-03-15 12:09:17
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 09:35:39
+ * @LastEditTime: 2023-03-23 15:55:38
  * @description: BaseLoading图片预加载
 -->
 <script setup lang="ts">
-import { getNetworkImg } from "@/api/api";
+import { GetNetworkImg } from "@/api/api";
 import imgList from "@/assets/ts/imgList";
 import { useAppStore } from "@/stores/app";
 
@@ -59,7 +59,7 @@ const handleLoadImg = () => {
 // 加载本地和网络图片
 const handleLoadNetworkImg = () => {
   return new Promise((resolve) => {
-    getNetworkImg()
+    GetNetworkImg()
       .then(res => {
         if (res.code == 200) {
           let imgUrlArr: string[] = []; // 定义预加载图片
