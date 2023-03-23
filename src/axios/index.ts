@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-19 23:09:21
+ * @LastEditTime: 2023-03-23 14:10:50
  * @description: axios
  */
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
@@ -73,7 +73,7 @@ service.interceptors.response.use((response: AxiosResponse<any, any>) => {
 /**
  * 基础的请求
 */
-// POST表单格式
+/** POST表单格式 */
 export function post<T>(url: string, params?: object) {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
@@ -95,7 +95,7 @@ export function post<T>(url: string, params?: object) {
   })
 }
 
-// POST JSON格式
+/** POST JSON格式 */
 export function postJSON<T>(url: string, params?: object) {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
@@ -113,7 +113,7 @@ export function postJSON<T>(url: string, params?: object) {
   })
 }
 
-// GET请求
+/** GET请求 */
 export function get<T>(url: string, params?: object) {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service

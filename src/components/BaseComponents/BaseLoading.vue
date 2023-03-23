@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-15 12:09:17
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-22 14:13:53
+ * @LastEditTime: 2023-03-23 09:35:39
  * @description: BaseLoading图片预加载
 -->
 <script setup lang="ts">
@@ -21,7 +21,7 @@ const progressInt = computed<number>( // 进度条
 
 // 加载图片
 const handleLoadImg = () => {
-  return new Promise((resovle) => {
+  return new Promise<string>((resovle) => {
     if (Object.keys(imgList).length === 0) return resovle("图片加载完成");
 
     // 取出需要预加载的图片
