@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-21 15:39:32
+ * @LastEditTime: 2023-03-24 17:58:48
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -100,7 +100,7 @@ export default defineConfig(({ mode, command }) => {
       AutoImport({
         dts: 'src/auto-imports.d.ts', // 会在根目录生成auto-imports.d.ts
         include: [/\.[tj]sx?$/, /\.vue$/], // 匹配的文件，也就是哪些后缀的文件需要自动引入
-        imports: ["vue", "pinia", "vue-router"], // 自动引入的api从这里找
+        imports: ['vue', 'pinia', 'vue-router', '@vueuse/head'], // 自动引入的api从这里找
         eslintrc: { // 根据项目情况配置eslintrc，默认是不开启的
           enabled: true, // @default false
           // 下面两个是其他配置，默认即可

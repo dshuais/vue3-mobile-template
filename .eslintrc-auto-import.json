@@ -67,6 +67,7 @@
     "useAttrs": true,
     "useCssModule": true,
     "useCssVars": true,
+    "useHead": true,
     "useLink": true,
     "useRoute": true,
     "useRouter": true,

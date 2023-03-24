@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 16:49:28
+ * @LastEditTime: 2023-03-24 17:28:31
  * @description: Index
 -->
 <script setup lang="ts">
@@ -97,6 +97,7 @@ watchEffect(() => {
   <BaseLoading ref="refLoading" />
   <transition name="faderouter" mode="out-in">
     <div class="container" v-if="showPage">
+      <!-- 预生产跑马灯 -->
       <BaseNoticeBar v-if="isPreProduction" />
 
       <Home />
