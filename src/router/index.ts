@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-18 17:01:55
+ * @LastEditTime: 2023-03-24 18:22:17
  * @description: vue-router
  */
 // import type { RouteRecordRaw } from 'vue-router'
@@ -12,8 +12,17 @@ import Index from '../views/index.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    redirect: '/index'
+  },
+  {
+    path: '/index',
+    name: 'Home',
     component: Index
+  },
+  {
+    path: '/game',
+    name: 'Game',
+    component: () => import('@/views/game.vue')
   },
 ]
 
