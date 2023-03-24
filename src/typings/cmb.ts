@@ -2,8 +2,8 @@
  * @Author: dushuai
  * @Date: 2023-03-24 10:57:28
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 11:56:41
- * @description: 招行接口response类型定义
+ * @LastEditTime: 2023-03-24 12:01:59
+ * @description: 招行接口response/request类型定义
  */
 
 /**

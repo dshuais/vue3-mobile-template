@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-24 10:57:28
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 11:57:05
+ * @LastEditTime: 2023-03-24 15:11:01
  * @description: 二次封装常用招行api
  */
 
@@ -13,10 +13,10 @@ import type { CmbCalendarReminder, CmbChooseImage, CmbFailResponse, CmbLoginData
 
 /**
  * 招行登录
- * @param {Function} successCB 登录成功回调
- * @param {Function} failCB 登录失败回调
+ * @param {Function} success 登录成功回调
+ * @param {Function} fail 登录失败回调
  */
-export const cmbAppLogin = (successCB: Function, failCB: Function) => {
+export const cmbAppLogin = (success: Function, fail: Function) => {
   const corpNo: string = import.meta.env.VITE_APP_CORPNO, // 商户号
     timeStamp: string = formatDate(new Date(), 'yyyyMMddHHmmss'), // 时间
     nonceStr: string = randomString(), // 随机字符串
@@ -30,10 +30,10 @@ export const cmbAppLogin = (successCB: Function, failCB: Function) => {
       sign
     },
     success: (res: CmbLoginData) => {
-      successCB && successCB(res)
+      success && success(res)
     },
     fail: (err: any) => {
-      failCB && failCB(err)
+      fail && fail(err)
     }
   })
 }
@@ -190,7 +190,7 @@ export const cmbAppShareInfoWithUI = (obj: CmbShareInfo) => {
     success = function (res: any) {
       console.log('分享成功', res)
     },
-    fail = function (res: any) {
+    fail = function (res: CmbFailResponse) {
       console.log('分享失败', res)
     }
   } = obj

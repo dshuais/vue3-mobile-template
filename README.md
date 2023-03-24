@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 16:41:03
+ * @LastEditTime: 2023-03-24 12:06:23
  * @description: 框架说明
 -->
 # 项目名称
@@ -45,6 +45,8 @@
 |     └─appActions.ts             存放操作状态方法action的文件
 │  └─typings                      ts类型定义文件目录
 |     └─response.ts               请求的response.data.data的数据结构类型定义文件
+|     └─request.ts                请求的request的数据结构类型定义文件
+|     └─cmb.ts                    cmb request/response的数据结构类型定义文件
 │  └─utils                        常用的工具类函数文件目录
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录

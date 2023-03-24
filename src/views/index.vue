@@ -2,11 +2,12 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 10:19:53
+ * @LastEditTime: 2023-03-24 14:55:20
  * @description: Index
 -->
 <script setup lang="ts">
 import { useLoginEffect } from "@/hooks/useLogin";
+import { useToast } from "@/hooks/useToast";
 import { useAppStore } from "@/stores/app";
 import { useAppActions } from "@/stores/appActions";
 
@@ -90,6 +91,17 @@ watchEffect(() => {
   }
 })
 
+const handleClick = () => {
+  const load = useToast().$loading()
+  setTimeout(() => {
+    // useToast().$msg('提示')
+    load.close()
+  }, 3000)
+}
+const handleClick2 = () => {
+  useToast().$msgFail()
+}
+
 onMounted(() => {
 })
 
@@ -100,7 +112,8 @@ onMounted(() => {
     <div class="container" v-if="showPage">
       <BaseNoticeBar v-if="isPreProduction" />
 
-      首页
+      <div @click="handleClick">首页</div>
+      <div @click="handleClick2">首页2</div>
     </div>
   </transition>
 </template>

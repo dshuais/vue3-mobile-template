@@ -2,9 +2,10 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 17:57:06
+ * @LastEditTime: 2023-03-24 12:11:44
  * @description: store
  */
+
 import type { LoginStatus } from "@/typings/app"
 
 export const useAppStore = defineStore('app', () => {

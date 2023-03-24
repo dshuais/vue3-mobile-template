@@ -2,8 +2,8 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:06:16
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 11:14:20
- * @description: app登录逻辑
+ * @LastEditTime: 2023-03-24 14:43:57
+ * @description: 抽离app登录逻辑hooks
  */
 import cmblapi from 'cmblapi'
 import { GetMerchantOpenToken, Login } from "@/api/api"
