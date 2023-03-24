@@ -20,7 +20,8 @@ stats.html
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
+# .vscode/*
+# .vscode
 .history
 !.vscode/extensions.json
 .idea
