@@ -2,16 +2,17 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 15:50:02
+ * @LastEditTime: 2023-03-24 10:19:53
  * @description: Index
 -->
 <script setup lang="ts">
+import { useLoginEffect } from "@/hooks/useLogin";
 import { useAppStore } from "@/stores/app";
 import { useAppActions } from "@/stores/appActions";
 
 const appStore = useAppStore(),
   appActions = useAppActions(),
-  { token, loginStatus } = storeToRefs(appStore)
+  { token } = storeToRefs(appStore)
 
 const showPage = ref<boolean>(false); // 页面的展示状态
 const refLoading = ref<ComponentInstance['BaseLoading']>()
@@ -80,6 +81,7 @@ watchEffect(() => {
         token.value = 'test-token=123456'
         // appActions.SET_TOKEN('test-token=123456')
       }, 1000)
+      // useLoginEffect().login() // 招行登录
     } else {
       nextTick(() => {
         createWechatPromiseAll()
@@ -87,7 +89,6 @@ watchEffect(() => {
     }
   }
 })
-
 
 onMounted(() => {
 })

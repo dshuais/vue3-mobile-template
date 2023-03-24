@@ -2,13 +2,14 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:06:16
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 18:13:35
+ * @LastEditTime: 2023-03-24 11:14:20
  * @description: app登录逻辑
  */
 import cmblapi from 'cmblapi'
 import { GetMerchantOpenToken, Login } from "@/api/api"
-import type { CmbLoginData, LoginDataParam, MerchantOpenData } from "@/typings/response"
-import { cmbAppLogin, cmbPopWindow } from "@/utils/cmbUtil"
+import type { CmbLoginData, CmbMerchantData } from '@/typings/cmb'
+import type { LoginDataParam } from "@/typings/response"
+import { cmbAppLogin, cmbAppPopWindow } from "@/utils/cmbUtil"
 import { useAppActions } from '@/stores/appActions'
 
 /**
@@ -17,7 +18,7 @@ import { useAppActions } from '@/stores/appActions'
 export const useLoginEffect = () => {
   /** 招行登录 */
   const login = () => {
-    return new Promise(resolve => {
+    return new Promise<string>((resolve, reject) => {
       if (import.meta.env.VITE_NODE_ENV === 'development') {
         let userInfo: CmbLoginData = {
           resultType: "Y",
@@ -29,10 +30,17 @@ export const useLoginEffect = () => {
         cmbAppLogin(
           (userInfo: CmbLoginData) => {
             getUserInfo(userInfo)
+              .then((response: boolean) => {
+                resolve('登陆成功')
+              })
+              .catch((err: boolean) => {
+                reject('登陆失败')
+              })
           },
           (err: any) => {
             console.log('cmb登录err:>> ', err);
-            cmbPopWindow() // 关闭app
+            reject('登陆失败')
+            cmbAppPopWindow() // 关闭app
           }
         )
       }
@@ -41,7 +49,7 @@ export const useLoginEffect = () => {
 
   /** 获取用户信息 */
   const getUserInfo = (userInfo: CmbLoginData) => {
-    return new Promise(resolve => {
+    return new Promise<boolean>((resolve, reject) => {
       Login({ sResponseXml: JSON.stringify(userInfo) })
         .then(res => {
           if (res.code === 200) {
@@ -74,7 +82,7 @@ export const useLoginEffect = () => {
               //     },
               //     corpNo: import.meta.env.VITE_APP_CORPNO, //商户号
               //     sign,
-              //     success: (res: MerchantOpenData) => {
+              //     success: (res: CmbMerchantData) => {
               //       console.log('调用招行羊毛党接口成功', res)
               //       const { errCode, errMsg, data } = res
               //       // 告知后端此人是不是羊毛党
@@ -86,7 +94,7 @@ export const useLoginEffect = () => {
               //           console.log('告知羊毛党接口异常', err)
               //         })
               //     },
-              //     fail: (error: MerchantOpenData) => {
+              //     fail: (error: CmbMerchantData) => {
               //       console.log('调用招行羊毛党接口失败', error)
               //       const { errCode, errMsg } = error
               //       // 失败默认是正常用户
@@ -105,15 +113,20 @@ export const useLoginEffect = () => {
             } else if (userType === 1) {
               useAppActions().SET_LOGIN_STATE({ key: 'isFreeNet', val: true })
             }
+            resolve(true)
           } else {
+            reject(false)
             console.log('登录获取token code!=200:>> ', res)
             window.location.href = import.meta.env.VITE_APP_ERROR_PAGE_URL
           }
         })
         .catch(err => {
+          reject(false)
           console.log('登录获取token失败:>> ', err)
           window.location.href = import.meta.env.VITE_APP_ERROR_PAGE_URL
         })
     })
   }
+
+  return { login }
 }

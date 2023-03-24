@@ -1,6 +1,10 @@
-/**
- * ts类型文件
-*/
+/*
+ * @Author: dushuai
+ * @Date: 2023-03-20 09:33:25
+ * @LastEditors: dushuai
+ * @LastEditTime: 2023-03-24 10:52:02
+ * @description: ts类型文件
+ */
 
 /**登陆状态*/
 export interface LoginStatus {

@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-23 18:32:14
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 18:35:26
+ * @LastEditTime: 2023-03-24 10:56:25
  * @description: 接口request
  */
 
@@ -16,5 +16,5 @@ export interface MerchantOpenReq {
   token: string,
   errCode: number,
   errMsg: string,
-  data: string
+  data?: string
 }
