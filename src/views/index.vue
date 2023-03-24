@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 14:55:20
+ * @LastEditTime: 2023-03-24 16:49:28
  * @description: Index
 -->
 <script setup lang="ts">
@@ -10,6 +10,8 @@ import { useLoginEffect } from "@/hooks/useLogin";
 import { useToast } from "@/hooks/useToast";
 import { useAppStore } from "@/stores/app";
 import { useAppActions } from "@/stores/appActions";
+import debounce from 'lodash/debounce'
+import Home from "./components/Home.vue";
 
 const appStore = useAppStore(),
   appActions = useAppActions(),
@@ -90,21 +92,6 @@ watchEffect(() => {
     }
   }
 })
-
-const handleClick = () => {
-  const load = useToast().$loading()
-  setTimeout(() => {
-    // useToast().$msg('提示')
-    load.close()
-  }, 3000)
-}
-const handleClick2 = () => {
-  useToast().$msgFail()
-}
-
-onMounted(() => {
-})
-
 </script>
 <template>
   <BaseLoading ref="refLoading" />
@@ -112,8 +99,7 @@ onMounted(() => {
     <div class="container" v-if="showPage">
       <BaseNoticeBar v-if="isPreProduction" />
 
-      <div @click="handleClick">首页</div>
-      <div @click="handleClick2">首页2</div>
+      <Home />
     </div>
   </transition>
 </template>
