@@ -2,11 +2,12 @@
  * @Author: dushuai
  * @Date: 2023-03-19 19:00:26
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 18:30:49
+ * @LastEditTime: 2023-03-27 16:22:09
  * @Description: 枚举文件
  */
 
-export enum Router {
+/** 页面枚举 */
+export enum Pages {
   首页 = '/',
-  游戏页 = '/game'
+  游戏 = '/game'
 }
