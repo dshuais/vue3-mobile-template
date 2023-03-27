@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 17:58:48
+ * @LastEditTime: 2023-03-27 11:03:36
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -124,7 +124,7 @@ export default defineConfig(({ mode, command }) => {
         verbose: true,
         disable: false,// 开启压缩(不禁用)，默认false即可
         deleteOriginFile: false, // 删除源文件
-        threshold: 1024 * 4, // 4kb以上压缩
+        threshold: 1024 * 10, // 4kb以上压缩
         algorithm: 'gzip', // 压缩算法
         ext: '.gz' // 文件类型
       }),

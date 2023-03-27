@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 12:06:23
+ * @LastEditTime: 2023-03-27 11:04:29
  * @description: 框架说明
 -->
 # 项目名称
@@ -16,7 +16,7 @@
 
 ## 提示
 
-1. 推荐使用`cnpm install`安装依赖，因`vite-plugin-imagemin`等有些包在国内不太好安装
+1. 推荐使用`yarn install`安装依赖，因`vite-plugin-imagemin`等有些包在国内不太好安装
 2. `.env.development`、`.env.sit`、` .env.uat`、`.env.production` 需要修改为项目对应环境的配置
 3. `auto-imports.d.ts`、`components.d.ts` 为按需加载（vue、vue-router、pinia、components下组件）自动生成文件，请勿修改且在代码内不要重复导入
 4. `node_modules` 、`mobile` 等非源码文件勿提交到SVN/git，可添加到SVN/git的ignore/.gitignore列表中
