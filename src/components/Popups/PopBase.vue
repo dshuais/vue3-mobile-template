@@ -2,37 +2,42 @@
  * @Author: dushuai
  * @Date: 2023-03-16 15:04:41
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-28 18:14:50
+ * @LastEditTime: 2023-03-29 19:09:04
  * @description: Pop 组件
 -->
 <script setup lang="ts">
-const props = defineProps<{ title: string }>()
+import { usePopups } from '@/hooks/usePopups';
+import { usePopupsStore } from '@/stores/popups';
+
+const { closePop } = usePopups()
+
+const props = defineProps<{ title?: string }>()
 const emit = defineEmits<{
   (e: 'click', val: number): void
 }>()
+const { popups } = storeToRefs(usePopupsStore())
 
 const show = ref<boolean>(false)
-
-// 弹窗状态改变
-const popShow = () => {
-  show.value = true
-}
-const closePop = () => {
-  show.value = false
-}
+//   show.value = true
+// }
+// const closePop = () => {
+//   show.value = false
+// }
 
 const handleEmit = () => {
   emit('click', 7788)
 }
 
 onMounted(() => {
+  popups.value['refPopBase'] = { show: show.value }
+  console.log('refPopups', popups.value)
   console.log('props', props);
   console.log('attrs', useAttrs())
 })
 
 defineExpose({
-  popShow,
-  closePop,
+  // popShow,
+  // closePop,
 })
 </script>
 <template>
@@ -41,7 +46,7 @@ defineExpose({
 
     <div class="pop-main" @click="handleEmit"></div>
 
-    <div class="close" @click="closePop">xxxxxx</div>
+    <div class="close" @click="closePop('refPopBase')">xxxxxx</div>
   </van-popup>
 </template>
 <style lang="less" scoped>

@@ -5131,11 +5131,6 @@ pngquant-bin@^6.0.0:
     bin-wrapper "^4.0.1"
     execa "^4.0.0"
 
-pnpm@^7.29.3:
-  version "7.30.3"
-  resolved "https://registry.npmmirror.com/pnpm/-/pnpm-7.30.3.tgz#fb200e05d66ad9e2d44f1440ffeaaf656e1bc10c"
-  integrity sha512-Z/pNEfZF45OwdZSUAeSTYySs27UW+GG4AQ2iXz4u127QVtkCMCeyrMNZmb/17BazaZTtvXqk/+jxTVkyh8apIA==
-
 postcss-plugin-px2rem@^0.8.1:
   version "0.8.1"
   resolved "https://registry.npmmirror.com/postcss-plugin-px2rem/-/postcss-plugin-px2rem-0.8.1.tgz#e8adf28fd2befbc079a119126b5c62a88905d5e1"

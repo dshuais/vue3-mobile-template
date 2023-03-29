@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-27 16:03:47
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-27 16:24:59
+ * @LastEditTime: 2023-03-29 16:37:25
  * @description: 重写路由跳转
  */
 import type { Pages } from "@/enum/app"
@@ -16,6 +16,7 @@ import type { RouteParamsRaw } from "vue-router"
  * @param {RouteParamsRaw} params 参数
  */
 export const to = (path: Pages, params?: RouteParamsRaw) => {
+  console.log('跳转页面')
   router.push({ path, query: { ...params } })
 }
 

@@ -23,7 +23,6 @@
     "lodash": "^4.17.21",
     "pinia": "^2.0.32",
     "pinia-plugin-persistedstate": "^3.1.0",
-    "pnpm": "^7.29.3",
     "qs": "^6.11.1",
     "vant": "^4.1.0",
     "vconsole": "^3.15.0",

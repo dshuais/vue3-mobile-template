@@ -2,12 +2,13 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 12:11:44
+ * @LastEditTime: 2023-03-29 19:09:18
  * @description: store
  */
 
 import type { LoginStatus } from "@/typings/app"
 
+/** app内store 存回话 */
 export const useAppStore = defineStore('app', () => {
   const token = ref<string>('')
   const loginStatus = reactive<LoginStatus>({ // 登录状态
