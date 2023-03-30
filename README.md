@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-27 11:04:29
+ * @LastEditTime: 2023-03-30 16:52:17
  * @description: 框架说明
 -->
 # 项目名称
@@ -20,6 +20,7 @@
 2. `.env.development`、`.env.sit`、` .env.uat`、`.env.production` 需要修改为项目对应环境的配置
 3. `auto-imports.d.ts`、`components.d.ts` 为按需加载（vue、vue-router、pinia、components下组件）自动生成文件，请勿修改且在代码内不要重复导入
 4. `node_modules` 、`mobile` 等非源码文件勿提交到SVN/git，可添加到SVN/git的ignore/.gitignore列表中
+5. 对弹框进行统一管理，弹框组件请根据`/src/components/Popups/popBase.vue`、`/src/hooks/usePopups.ts`内提示使用
 
 ## 目录结构
 
@@ -31,23 +32,29 @@
 │  └─assets            	          存放应用引用的本地静态资源（如图片、序列帧等）的目录
 │     └─img            	          静态图片文件目录
 │       └─resource                序列帧文件目录
+│  └─axios            	          封装axios请求
 │  └─common            	          公共文件
-│     └─style            	        公共样式文件目录
+│     └─style            	      公共样式文件目录
 |     └─ts                        公共函数的目录
 │  └─components                   符合vue组件规范的组件目录
 │     └─BaseComponents            基础组件目录
 │     └─Popups                    弹窗组件目录
+│         └─popBase               弹窗组件使用实例
 │  └─enum                         公共枚举文件目录
 │  └─hooks                        抽离hooks的文件目录
+│     └─useLogin                  抽离登录方法
+│     └─usePopups                 弹窗统一管理方法的hooks
 │  └─router                       路由文件
 │  └─stores                       状态管理仓库（pinia）文件目录
-|     └─app.ts                    存放状态state的文件
+|     └─app.ts                    存放app内状态state的文件
 |     └─appActions.ts             存放操作状态方法action的文件
+|     └─popups.ts                 存放弹窗状态state的文件 按规则使用即可,可不更改
 │  └─typings                      ts类型定义文件目录
 |     └─response.ts               请求的response.data.data的数据结构类型定义文件
 |     └─request.ts                请求的request的数据结构类型定义文件
 |     └─cmb.ts                    cmb request/response的数据结构类型定义文件
 │  └─utils                        常用的工具类函数文件目录
+|     └─cmbUtil.ts                cmb常用api
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录
 │  └─App.vue                      App根文件
@@ -55,7 +62,7 @@
 │  └─components.d.ts              按需加载组件自动生成文件（勿改）
 │  └─componentsInstance.d.ts      统一定义组件类型文件（勿改）
 │  └─main.js                      入口文件
-|─.env.xxx              	        环境变量配置
+|─.env.xxx              	      环境变量配置
 |─.eslintrc-auto-import           自定义按需加载api文件，配置项与auto-imports.d.ts相对
 |─.eslintrc.cjs                   ESLint规则
 │─env.d.ts                        自定义npm上没有声明文件包的声明文件
