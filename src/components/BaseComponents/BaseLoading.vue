@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-15 12:09:17
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 15:55:38
+ * @LastEditTime: 2023-03-30 15:34:16
  * @description: BaseLoading图片预加载
 -->
 <script setup lang="ts">
@@ -20,9 +20,9 @@ const progressInt = computed<number>( // 进度条
 );
 
 // 加载图片
-const handleLoadImg = () => {
+const handleLoadImg = (): Promise<string> => {
   return new Promise<string>((resovle) => {
-    if (Object.keys(imgList).length === 0) return resovle("图片加载完成");
+    if (Object.keys(imgList).length === 0 || loginStatus.value.isLoading) return resovle("图片加载完成");
 
     // 取出需要预加载的图片
     let imgUrlArr: string[] = [];
@@ -57,8 +57,9 @@ const handleLoadImg = () => {
 };
 
 // 加载本地和网络图片
-const handleLoadNetworkImg = () => {
-  return new Promise((resolve) => {
+const handleLoadNetworkImg = (): Promise<string> => {
+  return new Promise<string>((resolve) => {
+    if (loginStatus.value.isLoading) return resolve('图片加载完成')
     GetNetworkImg()
       .then(res => {
         if (res.code == 200) {

@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 12:03:24
+ * @LastEditTime: 2023-03-30 17:53:17
  * @description: axios
  */
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
@@ -30,7 +30,6 @@ const ErrorCodeHandle = (response: AxiosResponse<any, any>) => {
   } else {
     console.log('请求失败err:>> ', response.data);
   }
-
 }
 
 // axios基础配置
@@ -74,7 +73,7 @@ service.interceptors.response.use((response: AxiosResponse<any, any>) => {
  * 基础的请求
 */
 /** POST表单格式 */
-export function post<T = any>(url: string, params?: object) {
+export function post<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
       .post(url, qs.stringify(params), {
@@ -96,7 +95,7 @@ export function post<T = any>(url: string, params?: object) {
 }
 
 /** POST JSON格式 */
-export function postJSON<T = any>(url: string, params?: object) {
+export function postJSON<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
       .post(url, params)
@@ -114,7 +113,7 @@ export function postJSON<T = any>(url: string, params?: object) {
 }
 
 /** GET请求 */
-export function get<T = any>(url: string, params?: object) {
+export function get<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
       .get(url, { params })
