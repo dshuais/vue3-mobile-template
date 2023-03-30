@@ -2,16 +2,17 @@
  * @Author: dushuai
  * @Date: 2023-03-29 16:31:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 16:57:43
+ * @LastEditTime: 2023-03-30 17:24:42
  * @description: 打开关闭弹窗的hooks
  */
 import type { Popups } from "@/enums/app"
 import { usePopupsStore } from "@/stores/popups"
 
 /** 当前打开的弹窗列表 */
-const hasPops = ref<string[]>([])
+const hasPops = ref<`${Popups}`[]>([])
 
 export const usePopups = () => {
+  // 当前已挂载的弹框列表
   const { popups } = storeToRefs(usePopupsStore())
 
   /**
