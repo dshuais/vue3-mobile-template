@@ -29,7 +29,8 @@ const handleEmit = () => {
 }
 
 onMounted(() => {
-  popups.value['refPopBase'] = { show: show.value }
+  popups.value['refPopBase'] = { show }
+
   console.log('refPopups', popups.value)
   console.log('props', props);
   console.log('attrs', useAttrs())

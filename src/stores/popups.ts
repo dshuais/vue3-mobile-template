@@ -7,14 +7,19 @@
  */
 
 import type { Popups } from "@/enum/popups"
+import type { Ref } from 'vue'
 
 type PopupList = {
-  [key in Popups]?: { show: boolean }
+  [key in Popups]?: {  }
+}
+interface Obj {
+  show: Ref<boolean>
 }
 
 /** popups列表 不存回话 */
 export const usePopupsStore = defineStore('popups', () => {
-  const popups = reactive<PopupList>({})
+  
+  const popups = ref<PopupList>({})
 
   return { popups }
 })
