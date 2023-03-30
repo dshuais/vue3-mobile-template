@@ -6,8 +6,8 @@
  * @description: 游戏页
 -->
 <script setup lang='ts'>
-import { Pages } from '@/enum/app';
-import { Popups } from '@/enum/app';
+import { Pages } from '@/enums/app';
+import { Popups } from '@/enums/app';
 import { usePopups } from '@/hooks/usePopups';
 import { to } from '@/utils/router'
 

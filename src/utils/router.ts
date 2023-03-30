@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-03-30 10:56:21
  * @description: 重写路由跳转
  */
-import type { Pages } from "@/enum/app"
+import type { Pages } from "@/enums/app"
 import router from "@/router"
 import type { RouteParamsRaw } from "vue-router"
 

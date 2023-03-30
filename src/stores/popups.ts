@@ -6,7 +6,7 @@
  * @description: 弹窗store
  */
 
-import type { Popups } from "@/enum/app"
+import type { Popups } from "@/enums/app"
 
 /** 
  * 定义popups弹窗数据的列表

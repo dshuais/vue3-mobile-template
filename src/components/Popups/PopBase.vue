@@ -6,7 +6,7 @@
  * @description: Pop 组件示例
 -->
 <script setup lang="ts">
-import { Popups } from '@/enum/app';
+import { Popups } from '@/enums/app';
 import { usePopups } from '@/hooks/usePopups';
 import { usePopupsStore } from '@/stores/popups';
 

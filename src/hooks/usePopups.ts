@@ -5,7 +5,7 @@
  * @LastEditTime: 2023-03-30 16:57:43
  * @description: 打开关闭弹窗的hooks
  */
-import type { Popups } from "@/enum/app"
+import type { Popups } from "@/enums/app"
 import { usePopupsStore } from "@/stores/popups"
 
 /** 当前打开的弹窗列表 */

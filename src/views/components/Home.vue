@@ -2,11 +2,11 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 16:25:24
+ * @LastEditTime: 2023-03-30 17:14:37
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
-import { Pages, Popups } from '@/enum/app';
+import { Pages, Popups } from '@/enums/app';
 import { usePopups } from '@/hooks/usePopups';
 import { useAppStore } from '@/stores/app';
 import { redirect, to } from '@/utils/router';
