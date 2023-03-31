@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-15 14:44:06
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-23 18:35:49
+ * @LastEditTime: 2023-03-31 10:21:31
  * @description: api
  */
 import { post, postJSON, get } from '@/axios/index'
@@ -17,3 +17,6 @@ export const GetMerchantOpenToken = (params: MerchantOpenReq) => post('app/getNe
 
 /** 可能用到的预加载网络图片 */
 export const GetNetworkImg = () => post<NetworkImgData>('app/xxx')
+
+/** 测试接口 */
+export const GetCaptcha = (paarams: { [key: string]: string }) => get<{ captchaImg: string }>('api/captcha', paarams)

@@ -2,10 +2,11 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 17:29:33
+ * @LastEditTime: 2023-03-31 11:20:20
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
+import { GetCaptcha } from '@/api/api';
 import { Pages, Popups } from '@/enums/app';
 import { usePopups } from '@/hooks/usePopups';
 import { useAppStore } from '@/stores/app';
@@ -22,6 +23,20 @@ const handleShowPop = () => {
   popShow(Popups.popBase)
 }
 
+const handleCaptcha = () => {
+  GetCaptcha({
+    data: '请求参数'
+  })
+    .then(res => {
+      if (res.code === 200) {
+        // console.log('res.data', res.data.captchaImg)
+      }
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
+}
+
 onMounted(() => {
 })
 </script>
@@ -32,6 +47,9 @@ onMounted(() => {
   <van-button type="primary" @click="handleShowPop">打开弹窗</van-button>
 
   <van-button type="primary" @click="closeOtherPop">关闭所有弹窗</van-button>
+
+  <van-button type="primary" @click="handleCaptcha">请求接口</van-button>
+
 
   <PopBase ref="refPopBase" />
 
