@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-19 22:08:30
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 10:58:59
+ * @LastEditTime: 2023-03-31 17:37:39
  * @Description: 接口response data类型文件
  */
 
@@ -21,7 +21,7 @@ export interface LoginData {
   sign?: string,
   userType?: number
 }
-/** 登录接口param 羊毛党参数 */
+/** 登录接口data >> param 羊毛党参数 */
 export interface LoginDataParam {
   trxCode: string,
   expandUserID: string,

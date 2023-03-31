@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-31 11:20:20
+ * @LastEditTime: 2023-03-31 17:17:53
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
@@ -24,12 +24,13 @@ const handleShowPop = () => {
 }
 
 const handleCaptcha = () => {
-  GetCaptcha({
-    data: '请求参数'
-  })
+  GetCaptcha()
     .then(res => {
+      console.log('res', res)
       if (res.code === 200) {
         // console.log('res.data', res.data.captchaImg)
+      } else {
+        console.log('res', res)
       }
     })
     .catch(err => {

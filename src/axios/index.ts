@@ -2,10 +2,10 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-31 11:27:28
+ * @LastEditTime: 2023-03-31 17:32:37
  * @description: axios
  */
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import qs from 'qs'
 import md5 from 'js-md5'
 import { useAppStore } from '@/stores/app'
@@ -49,7 +49,7 @@ const ErrorCodeHandle = (response: AxiosResponse<any, any>): void => {
  * @param {InternalAxiosRequestConfig} config 请求数据
  * @param {boolean} log 是否打印取消的url
  */
-const removeHttp = (config: InternalAxiosRequestConfig, log: boolean = false): void => {
+const removePending = (config: InternalAxiosRequestConfig, log: boolean = false): void => {
   const url = config.url ? config.url : 'default/baseurl',
     key = md5(`${config.url ? config.url : 'default/baseurl'}&${config.method}${config.data ? '&' + JSON.stringify(config.data) : ''}${config.params ? '&' + JSON.stringify(config.params) : ''}`)
 
@@ -70,50 +70,59 @@ const service = axios.create({
 })
 
 // 请求拦截
-service.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
-  const { token } = storeToRefs(useAppStore())
-  if (token.value) {
-    config.headers['token'] = token.value
-  }
-
-  removeHttp(config, true) // 删除重复请求
-
-  const controller: AbortController = new AbortController(),
-    pending = {
-      url: config.url ? config.url : 'default/baseurl',
-      key: md5(`${config.url ? config.url : 'default/baseurl'}&${config.method}${config.data ? '&' + JSON.stringify(config.data) : ''}${config.params ? '&' + JSON.stringify(config.params) : ''}`),
-      c: controller
+service.interceptors.request.use(
+  (config: InternalAxiosRequestConfig<any>) => {
+    const { token } = storeToRefs(useAppStore())
+    if (token.value) {
+      config.headers['token'] = token.value
     }
 
-  config.signal = controller.signal
-  pendingList.push(pending)
+    removePending(config, true) // 删除重复请求
 
-  // console.log('请求拦截 config:>> ', config)
+    const controller: AbortController = new AbortController(),
+      pending = {
+        url: config.url ? config.url : 'default/baseurl',
+        key: md5(`${config.url ? config.url : 'default/baseurl'}&${config.method}${config.data ? '&' + JSON.stringify(config.data) : ''}${config.params ? '&' + JSON.stringify(config.params) : ''}`),
+        c: controller
+      }
 
-  return config
-},
-  err => {
+    config.signal = controller.signal
+    pendingList.push(pending)
+
+    // console.log('请求拦截 config:>> ', config)
+
+    return config
+  },
+  (err: AxiosError) => {
     return Promise.reject(err)
   }
 )
 
 // 响应拦截
-service.interceptors.response.use((response: AxiosResponse<any, any>) => {
-  removeHttp(response.config) // 删除重复请求
+service.interceptors.response.use(
+  (response: AxiosResponse<any, any>) => {
+    removePending(response.config) // 删除重复请求
 
-  const url = response.config.url as string
-  if (whiteList.some(e => e.match(url))) {
-    console.log('接口通过白名单，不需要异常处理:>> ', url)
-  } else {
-    ErrorCodeHandle(response)
-  }
+    const url = response.config.url as string
+    if (whiteList.some(e => e.match(url))) {
+      console.log('接口通过白名单，不需要异常处理:>> ', url)
+    } else {
+      ErrorCodeHandle(response)
+    }
 
-  // console.log('响应拦截 response:>> ', response)
-
-  return response
-},
-  err => {
-    return Promise.reject(err)
+    // console.log('响应拦截 response:>> ', response)
+    return response
+  },
+  (err: AxiosError) => {
+    /**
+     * 将取消请求的错误捕获
+     * 根据需要设置 因为需要对每个请求单独处理catch 所以隐藏取消请求的错误返回
+     */
+    if (err.code === 'ERR_CANCELED') {
+      // console.log('请求取消url:>> ', err.config?.url)
+    } else {
+      return Promise.reject(err)
+    }
   }
 )
 
@@ -130,14 +139,15 @@ export function post<T = any>(url: string, params?: object): Promise<ResponseRes
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
       })
-      .then(response => {
-        resolve(response.data as ResponseRes<T>)
-      },
-        err => {
+      .then(
+        (response: AxiosResponse<ResponseRes<T>>) => {
+          response && resolve(response.data)
+        },
+        (err: AxiosError) => {
           reject(err)
         }
       )
-      .catch(err => {
+      .catch((err: AxiosError) => {
         reject(err)
       })
   })
@@ -148,14 +158,15 @@ export function postJSON<T = any>(url: string, params?: object): Promise<Respons
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
       .post(url, params)
-      .then(response => {
-        resolve(response.data as ResponseRes<T>)
-      },
-        err => {
+      .then(
+        (response: AxiosResponse<ResponseRes<T>>) => {
+          response && resolve(response.data)
+        },
+        (err: AxiosError) => {
           reject(err)
         }
       )
-      .catch(error => {
+      .catch((error: AxiosError) => {
         reject(error)
       })
   })
@@ -166,14 +177,15 @@ export function get<T = any>(url: string, params?: object): Promise<ResponseRes<
   return new Promise<ResponseRes<T>>((resolve, reject) => {
     service
       .get(url, { params })
-      .then(response => {
-        resolve(response.data as ResponseRes<T>)
-      },
-        err => {
+      .then(
+        (response: AxiosResponse<ResponseRes<T>>) => {
+          response && resolve(response.data)
+        },
+        (err: AxiosError) => {
           reject(err)
         }
       )
-      .catch(error => {
+      .catch((error: AxiosError) => {
         reject(error)
       })
   })
