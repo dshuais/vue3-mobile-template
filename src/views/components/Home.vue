@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-03 11:13:19
+ * @LastEditTime: 2023-04-03 16:25:22
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
@@ -12,7 +12,7 @@ import { usePopups } from '@/hooks/usePopups';
 import { useAppStore } from '@/stores/app';
 import { redirect, to } from '@/utils/router';
 
-const { popShow, hasPops, closeOtherPop } = usePopups()
+const { popShow, closeOtherPop, openPopups } = usePopups()
 const handleJump = () => {
   to(Pages.Game)
 }
@@ -39,6 +39,7 @@ const handleCaptcha = () => {
 }
 
 onMounted(() => {
+
 })
 </script>
 <template>
@@ -54,6 +55,6 @@ onMounted(() => {
 
   <PopBase ref="refPopBase" />
 
-  <div>当前打开的弹窗：{{ hasPops }}</div>
+  <div v-for="(item, ind) in openPopups" :key="ind">当前打开的弹窗：map {{ item[0] }}</div>
 </template>
 <style lang='less' scoped></style>

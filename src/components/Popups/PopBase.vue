@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-16 15:04:41
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 16:57:35
+ * @LastEditTime: 2023-04-03 16:37:20
  * @description: Pop 组件示例
 -->
 <script setup lang="ts">
@@ -15,8 +15,7 @@ import { usePopupsStore } from '@/stores/popups';
  * 在usePopups()上有打开、关闭、关闭全部和当前打开弹窗列表等数据 可供使用
  * 弹窗状态show 定义在当前组件 在组件挂在完成后放进pinia popups内
  */
-const { hasPops, closePop, popShow, closeOtherPop } = usePopups()
-const { popups } = storeToRefs(usePopupsStore())
+const { openPopups, closePop, popShow, closeOtherPop } = usePopups()
 const show = ref<boolean>(false)
 /** 关闭弹窗 */
 const close = (): void => {
@@ -36,7 +35,8 @@ onMounted(() => {
    * 当弹窗挂载完成后 把该弹窗放进popups pinia内统一管理
    * @param {ref<boolean>} show show为必须参数 且应传响应式数据
   */
-  popups.value[Popups.popBase] = { show }
+  // popups.value[Popups.popBase] = { show }
+  usePopupsStore().SET_POPUPS(Popups.popBase, { show })
 })
 
 /**

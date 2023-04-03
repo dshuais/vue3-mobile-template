@@ -2,14 +2,15 @@
  * @Author: dushuai
  * @Date: 2023-03-29 16:31:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 17:24:42
+ * @LastEditTime: 2023-04-03 16:24:57
  * @description: 打开关闭弹窗的hooks
  */
 import type { Popups } from "@/enums/app"
-import { usePopupsStore } from "@/stores/popups"
+import { PopupVal, usePopupsStore } from "@/stores/popups"
+
 
 /** 当前打开的弹窗列表 */
-const hasPops = ref<`${Popups}`[]>([])
+const openPopups = ref<Map<Popups, Function>>(new Map())
 
 export const usePopups = () => {
   // 当前已挂载的弹框列表
@@ -22,11 +23,15 @@ export const usePopups = () => {
    */
   const popShow = async (name: Popups, other: boolean = false): Promise<void> => {
     if (popups.value && popups.value[name]) {
-      const pop = popups.value[name], index = hasPops.value.indexOf(name)
+      const pop: PopupVal = popups.value[name] as PopupVal
       if (pop?.show) return console.warn('该弹窗已处于打开状态:>> ', name)
+
       if (other) await closeOtherPop()
+
       pop && (pop.show = true)
-      if (index == -1) hasPops.value.push(name)
+      if (!openPopups.value.has(name)) {
+        openPopups.value.set(name, popClose(name))
+      }
     } else {
       console.warn('此页面没有该弹窗:>> ', name)
     }
@@ -37,13 +42,29 @@ export const usePopups = () => {
    * @param {Popups} name 要关闭的弹窗
    */
   const closePop = (name: Popups): void => {
-    if (popups.value && popups.value[name]) {
-      const pop = popups.value[name], index = hasPops.value.indexOf(name)
-      if (!pop?.show) return console.warn('该弹窗已处于关闭状态:>> ', name)
-      if (index != -1) hasPops.value.splice(index, 1)
-      pop && (pop.show = false)
+    if (openPopups.value.has(name)) {
+      const c: Function = openPopups.value.get(name) as Function
+      c()
+      openPopups.value.delete(name)
     } else {
-      console.warn('此页面没有该弹窗:>> ', name)
+      console.warn('该弹窗已处于关闭状态:>> ', name)
+    }
+  }
+
+  /**
+   * 关闭弹窗
+   * @param {Popups} name 要关闭的弹窗
+   * @returns {Functison} 返回一个关闭弹窗方法
+   */
+  const popClose = (name: Popups): Function => {
+    return () => {
+      if (popups.value && popups.value[name]) {
+        const pop: PopupVal = popups.value[name] as PopupVal
+        if (!pop?.show) return console.warn('该弹窗已处于关闭状态:>> ', name)
+        pop && (pop.show = false)
+      } else {
+        console.warn('此页面没有该弹窗:>> ', name)
+      }
     }
   }
 
@@ -52,10 +73,19 @@ export const usePopups = () => {
    */
   const closeOtherPop = (): Promise<boolean> => {
     return new Promise(resolve => {
-      hasPops.value.forEach(pop => closePop(pop as Popups))
+      openPopups.value.forEach(c => c())
+      openPopups.value.clear()
+      resetPops()
       resolve(true)
     })
   }
 
-  return { hasPops, popShow, closePop, closeOtherPop }
+  /**
+   * 重置openPopups 弹框列表
+   */
+  const resetPops = (): void => {
+    openPopups.value = new Map()
+  }
+
+  return { openPopups, popShow, closePop, closeOtherPop }
 }
