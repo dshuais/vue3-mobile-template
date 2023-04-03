@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 15:24:54
+ * @LastEditTime: 2023-04-03 11:10:35
  * @description: App
 -->
 <script setup lang="ts">
@@ -29,7 +29,7 @@ watchEffect(() => {
   const cur: string = router?.currentRoute.value?.path
   if (cur && cur !== path.value && cur !== '/') {
     path.value = cur
-    console.log('routerApp 当前页面', cur)
+    console.log('App当前页面', cur)
     if (hasPops.value.length > 0) closeOtherPop()
     popups.value = {}
   }

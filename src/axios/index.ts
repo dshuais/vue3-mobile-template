@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-31 17:32:37
+ * @LastEditTime: 2023-04-03 12:28:40
  * @description: axios
  */
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
@@ -11,18 +11,12 @@ import md5 from 'js-md5'
 import { useAppStore } from '@/stores/app'
 import { useAppActions } from '@/stores/appActions'
 import type { ResponseRes } from '@/typings/response'
+import { cancelRequest } from './cancelRequest'
 
-/** 请求接口列表的数据结构 */
-interface Pending {
-  url: string,
-  key: string,
-  c: AbortController
-}
 
 const whiteList: string[] = ['/qiniu/upload/uptoken'], // 不需要处理异常白名单
   noTokenUrl: string[] = ['app/main/getToken'], // 不需要token的接口列表
-  to404Url: number[] = [], // 报错需要跳转降级页的状态码 -500
-  pendingList: Pending[] = [] // 请求接口列表
+  to404Url: number[] = [] // 报错需要跳转降级页的状态码 -500
 
 /**
  * 统一处理报错
@@ -44,24 +38,6 @@ const ErrorCodeHandle = (response: AxiosResponse<any, any>): void => {
   }
 }
 
-/**
- * 取消重复请求
- * @param {InternalAxiosRequestConfig} config 请求数据
- * @param {boolean} log 是否打印取消的url
- */
-const removePending = (config: InternalAxiosRequestConfig, log: boolean = false): void => {
-  const url = config.url ? config.url : 'default/baseurl',
-    key = md5(`${config.url ? config.url : 'default/baseurl'}&${config.method}${config.data ? '&' + JSON.stringify(config.data) : ''}${config.params ? '&' + JSON.stringify(config.params) : ''}`)
-
-  for (let i = 0; i < pendingList.length; i++) {
-    if (pendingList[i].url === url && pendingList[i].key === key) {
-      pendingList[i].c.abort() // 取消已有请求
-      pendingList.splice(i, 1)
-      i -= 1
-      log && console.log('请求取消url:>> ', url)
-    }
-  }
-}
 
 // axios基础配置
 const service = axios.create({
@@ -72,25 +48,15 @@ const service = axios.create({
 // 请求拦截
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig<any>) => {
+    // 添加token
     const { token } = storeToRefs(useAppStore())
     if (token.value) {
       config.headers['token'] = token.value
     }
 
-    removePending(config, true) // 删除重复请求
-
-    const controller: AbortController = new AbortController(),
-      pending = {
-        url: config.url ? config.url : 'default/baseurl',
-        key: md5(`${config.url ? config.url : 'default/baseurl'}&${config.method}${config.data ? '&' + JSON.stringify(config.data) : ''}${config.params ? '&' + JSON.stringify(config.params) : ''}`),
-        c: controller
-      }
-
-    config.signal = controller.signal
-    pendingList.push(pending)
+    cancelRequest.addPending(config) // 添加当前请求至请求列表
 
     // console.log('请求拦截 config:>> ', config)
-
     return config
   },
   (err: AxiosError) => {
@@ -101,7 +67,7 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (response: AxiosResponse<any, any>) => {
-    removePending(response.config) // 删除重复请求
+    cancelRequest.removePending(response.config) // 删除重复请求
 
     const url = response.config.url as string
     if (whiteList.some(e => e.match(url))) {
@@ -119,7 +85,7 @@ service.interceptors.response.use(
      * 根据需要设置 因为需要对每个请求单独处理catch 所以隐藏取消请求的错误返回
      */
     if (err.code === 'ERR_CANCELED') {
-      // console.log('请求取消url:>> ', err.config?.url)
+      console.log('请求取消url:>> ', err.config?.url)
     } else {
       return Promise.reject(err)
     }
