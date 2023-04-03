@@ -2,42 +2,19 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-03 12:28:40
+ * @LastEditTime: 2023-04-03 14:49:32
  * @description: axios
  */
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import qs from 'qs'
-import md5 from 'js-md5'
 import { useAppStore } from '@/stores/app'
-import { useAppActions } from '@/stores/appActions'
 import type { ResponseRes } from '@/typings/response'
-import { cancelRequest } from './cancelRequest'
+import { cancelRequest } from './requestCancel'
+import ErrorCodeHandle from './requestCode'
 
 
-const whiteList: string[] = ['/qiniu/upload/uptoken'], // 不需要处理异常白名单
-  noTokenUrl: string[] = ['app/main/getToken'], // 不需要token的接口列表
-  to404Url: number[] = [] // 报错需要跳转降级页的状态码 -500
-
-/**
- * 统一处理报错
- * @param {AxiosResponse} response 请求相应参数
- */
-const ErrorCodeHandle = (response: AxiosResponse<any, any>): void => {
-  const code: number = response.data.code,
-    url = response.config.url as string
-
-  if (code === 200) { // 正常
-
-  } else if (code === 401 && noTokenUrl.includes(url)) { // 401未登录
-    console.log('登陆失败err:>> ', url)
-    useAppActions().REMOVE_TOKEN()
-  } else if (to404Url.includes(code)) { // 跳降级页
-    window.location.href = import.meta.env.VITE_APP_ERROR_PAGE_URL
-  } else {
-    console.log('请求失败err:>> ', response.data);
-  }
-}
-
+/** 不需要处理异常白名单 */
+const whiteList: string[] = ['/qiniu/upload/uptoken']
 
 // axios基础配置
 const service = axios.create({
@@ -67,11 +44,12 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (response: AxiosResponse<any, any>) => {
+    const url = response.config.url as string
+
     cancelRequest.removePending(response.config) // 删除重复请求
 
-    const url = response.config.url as string
     if (whiteList.some(e => e.match(url))) {
-      console.log('接口通过白名单，不需要异常处理:>> ', url)
+      console.log('接口通过白名单，不需要异常处理url:>> ', url)
     } else {
       ErrorCodeHandle(response)
     }
