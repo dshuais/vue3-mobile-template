@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-07 17:20:22
+ * @LastEditTime: 2023-04-07 17:59:50
  * @description: 框架说明
 -->
 # 项目名称
@@ -55,6 +55,7 @@
 |     └─cmb.ts                    cmb request/response的数据结构类型定义文件
 │  └─utils                        常用的工具类函数文件目录
 |     └─cmbUtil.ts                cmb常用api
+|     └─is.ts                     is类型推断
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录
 │  └─App.vue                      App根文件
