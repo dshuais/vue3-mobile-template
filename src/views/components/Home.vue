@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-07 11:22:44
+ * @LastEditTime: 2023-04-07 16:44:31
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
@@ -56,5 +56,31 @@ onMounted(() => {
   <PopBase ref="refPopBase" />
 
   <div v-for="(item, ind) in openPopups" :key="ind">当前打开的弹窗：map {{ item[0] }}</div>
+
+  <div style="background-color: red;">
+    <div class="ripple-circle"></div>
+    <div class="hand"></div>
+  </div>
 </template>
-<style lang='less' scoped></style>
+<style lang='less' scoped>
+.hand {
+  .wh(99, 127);
+  .bg('index/hand.png');
+  .atl(245, 63);
+  animation: hand 1.5s linear infinite;
+}
+
+@keyframes hand {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+</style>

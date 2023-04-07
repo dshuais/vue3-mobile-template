@@ -211,6 +211,7 @@ img {
 li {
   list-style: none;
 }
+
 .van-popup {
   min-width: 100%;
   // height: 100vh; // 可以设置弹窗居中的话注释height
@@ -220,3 +221,39 @@ li {
   align-items: center;
 }
 
+// 小手点击涟漪效果
+.ripple-circle {
+  position: relative;
+  .wh(150, 150);
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    // border: 6px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: rippleCircle 3s linear infinite;
+    box-shadow: 0 0 15px 15px rgba(255, 255, 255, 1) inset;
+  }
+
+  &::after {
+    animation-delay: -1.5s;
+  }
+
+  @keyframes rippleCircle {
+    0% {
+      .wh(0, 0);
+      top: 75px;
+      left: 75px;
+      opacity: 1;
+    }
+
+    100% {
+      .wh(150, 150);
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+  }
+}
