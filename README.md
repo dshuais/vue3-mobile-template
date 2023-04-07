@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 16:52:17
+ * @LastEditTime: 2023-04-07 17:03:13
  * @description: 框架说明
 -->
 # 项目名称
@@ -31,7 +31,7 @@
 │  └─api          	              业务请求接口
 │  └─assets            	          存放应用引用的本地静态资源（如图片、序列帧等）的目录
 │     └─img            	          静态图片文件目录
-│       └─resource                序列帧文件目录
+│     └─resource                  序列帧文件目录
 │  └─axios            	          封装axios请求
 │  └─common            	          公共文件
 │     └─style            	      公共样式文件目录
