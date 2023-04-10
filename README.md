@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-10 14:53:14
+ * @LastEditTime: 2023-04-10 16:41:03
  * @description: 框架说明
 -->
 # 项目名称
@@ -53,12 +53,15 @@
 |     └─appActions.ts             存放操作状态方法action的文件
 |     └─popups.ts                 存放弹窗状态state的文件 按规则使用即可,可不更改
 │  └─typings                      ts类型定义文件目录
-|     └─response.ts               请求的response.data.data的数据结构类型定义文件
-|     └─request.ts                请求的request的数据结构类型定义文件
-|     └─cmb.ts                    cmb request/response的数据结构类型定义文件
+|     └─app.d.ts                  app内数据类型
+|     └─cmb.d.ts                  cmb request/response的数据结构类型定义文件
+|     └─env.d.ts                  自定义npm上没有声明文件包的声明文件
+|     └─request.d.ts              请求的request的数据结构类型定义文件
+|     └─response.d.ts             请求的response.data.data的数据结构类型定义文件
 │  └─utils                        常用的工具类函数文件目录
 |     └─cmbUtil.ts                cmb常用api
 |     └─is.ts                     is类型推断
+|     └─index.ts                  工具方法
 |     └─router.ts                 重写路由跳转
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录
@@ -71,7 +74,6 @@
 |─.env.xxx              	      环境变量配置
 |─.eslintrc-auto-import           自定义按需加载api文件，配置项与auto-imports.d.ts相对
 |─.eslintrc.cjs                   ESLint规则
-│─env.d.ts                        自定义npm上没有声明文件包的声明文件
 │─index.html
 │─package.json
 │─pnpm-lock.yaml
