@@ -2,14 +2,13 @@
  * @Author: dushuai
  * @Date: 2023-03-24 10:57:28
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 15:11:01
+ * @LastEditTime: 2023-04-10 16:30:33
  * @description: 二次封装常用招行api
  */
 
 import md5 from 'js-md5'
 import cmblapi from 'cmblapi'
 import { formatDate, randomString } from './index'
-import type { CmbCalendarReminder, CmbChooseImage, CmbFailResponse, CmbLoginData, CmbOnpageShow, CmbSaveImage, CmbShareInfo } from '@/typings/cmb'
 
 /**
  * 招行登录
@@ -29,7 +28,7 @@ export const cmbAppLogin = (success: Function, fail: Function) => {
       nonceStr,
       sign
     },
-    success: (res: CmbLoginData) => {
+    success: (res: Cmb.CmbLoginData) => {
       success && success(res)
     },
     fail: (err: any) => {
@@ -61,7 +60,7 @@ export const cmbAppPushWindow = (url: string) => {
         windowStyle: 'normal' // normal展示跳转后页面的标题 applet本活动标题
       },
       success: function () { },
-      fail: function (res: CmbFailResponse) {
+      fail: function (res: Cmb.CmbFailResponse) {
         console.log(res)
         if (res.errCode === 100) {
           cmblapi.pushWindow({
@@ -126,7 +125,7 @@ export const cmbAppPopWindow = () => {
  * 监听返回小程序页面刷新
  * @param {CmbOnpageShow} obj 页面监听的事件、有效期、成功、失败、触发等回调对象
  */
-export const cmbAppOnpageShow = (obj: CmbOnpageShow) => {
+export const cmbAppOnpageShow = (obj: Cmb.CmbOnpageShow) => {
   if (process.env.NODE_ENV === 'development') return console.log('开启页面监听')
   let {
     eventName = 'onPageShow', // onLoginSuccess 用户登录成功 onPageShow 当前页面曝光显示  onPageHide	当前页面隐藏(注意：如果是关闭浏览器窗不会收到该事件，可以用 HTML onunload事件属性)或压入后台 onLogoutSuccess 用户登出成功
@@ -157,7 +156,7 @@ export const cmbAppOnpageShow = (obj: CmbOnpageShow) => {
  * 添加日历提醒
  * @param {CmbCalendarReminder} remindObj 日历提醒名称、提醒次数、提醒时间、回调等对象
  */
-export const cmbAppCalendarReminder = (remindObj: CmbCalendarReminder = {}) => {
+export const cmbAppCalendarReminder = (remindObj: Cmb.CmbCalendarReminder = {}) => {
   cmblapi.calendarReminder(
     Object.assign(
       {
@@ -165,7 +164,7 @@ export const cmbAppCalendarReminder = (remindObj: CmbCalendarReminder = {}) => {
         remindType: 'single', // single :单次提醒； month:每月提醒一次；year :每年提醒一次
         remindTime: new Date().getTime() + 60000, // 日历提醒的时间，格式为“yyyyMMddHHmmss”
         success: (res: any) => console.log('添加日历成功', res),
-        fail: (err: CmbFailResponse) => console.log(err.errCode, err.errMsg)
+        fail: (err: Cmb.CmbFailResponse) => console.log(err.errCode, err.errMsg)
       },
       remindObj
     )
@@ -176,7 +175,7 @@ export const cmbAppCalendarReminder = (remindObj: CmbCalendarReminder = {}) => {
  * 新版分享（带ui页面）
  * @param {CmbShareInfo} obj 分享类型、渠道、参数、回调等
  */
-export const cmbAppShareInfoWithUI = (obj: CmbShareInfo) => {
+export const cmbAppShareInfoWithUI = (obj: Cmb.CmbShareInfo) => {
   if (process.env.NODE_ENV === 'development') return console.log('调用招行分享接口', obj)
   let {
     type = 'url', // url: 网页分享 image: 纯图片分享 text: 纯文本分享
@@ -190,7 +189,7 @@ export const cmbAppShareInfoWithUI = (obj: CmbShareInfo) => {
     success = function (res: any) {
       console.log('分享成功', res)
     },
-    fail = function (res: CmbFailResponse) {
+    fail = function (res: Cmb.CmbFailResponse) {
       console.log('分享失败', res)
     }
   } = obj
@@ -207,14 +206,14 @@ export const cmbAppShareInfoWithUI = (obj: CmbShareInfo) => {
  * 保存图片到相册
  * @param {CmbSaveImage} obj 保存的图片(base64)、回调等
  */
-export const cmbAppSaveImageToAlbum = (obj: CmbSaveImage) => {
+export const cmbAppSaveImageToAlbum = (obj: Cmb.CmbSaveImage) => {
   if (process.env.NODE_ENV === 'development') return console.log('调用招行保存图片接口')
   let {
     picData = '', // 需要保存的图片内容字符串（base64编码）
     success = function (res: any) {
       console.log('保存成功 res', res)
     },
-    fail = function (err: CmbFailResponse) {
+    fail = function (err: Cmb.CmbFailResponse) {
       console.log('保存失败 res', err)
     }
   } = obj
@@ -244,7 +243,7 @@ export const cmbAppSaveImageToAlbum = (obj: CmbSaveImage) => {
 *         若thumbnailsMaxSize小于原图大小的10%，将返回原图大小的10%
 * @Remd more https://open.cloud.cmbchina.com/#/apistoredetail?tabname=apistore&catid=5&catname=%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%B1%BB&pkid=c244ef4e-5792-48c4-bdcc-e5bdcde944a4
  */
-export const cmbAppChooseImage = (obj: CmbChooseImage) => {
+export const cmbAppChooseImage = (obj: Cmb.CmbChooseImage) => {
   if (process.env.NODE_ENV === 'development') return console.log('调用招行拍照接口')
   let {
     action = 'default', // default相册/相机 album相册 camera相机 portrait人脸相机 imageClip相册或者相机并裁剪
@@ -257,7 +256,7 @@ export const cmbAppChooseImage = (obj: CmbChooseImage) => {
     success = function (res: any) {
       console.log('chooseImage成功 res', res)
     },
-    fail = function (res: CmbFailResponse) {
+    fail = function (res: Cmb.CmbFailResponse) {
       console.log('chooseImage失败 res', res)
     }
   } = obj

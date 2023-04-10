@@ -2,13 +2,11 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:06:16
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-24 14:43:57
+ * @LastEditTime: 2023-04-10 16:32:56
  * @description: 抽离app登录逻辑hooks
  */
 import cmblapi from 'cmblapi'
 import { GetMerchantOpenToken, Login } from "@/api/api"
-import type { CmbLoginData, CmbMerchantData } from '@/typings/cmb'
-import type { LoginDataParam } from "@/typings/response"
 import { cmbAppLogin, cmbAppPopWindow } from "@/utils/cmbUtil"
 import { useAppActions } from '@/stores/appActions'
 
@@ -20,7 +18,7 @@ export const useLoginEffect = () => {
   const login = () => {
     return new Promise<string>((resolve, reject) => {
       if (import.meta.env.VITE_NODE_ENV === 'development') {
-        let userInfo: CmbLoginData = {
+        let userInfo: Cmb.CmbLoginData = {
           resultType: "Y",
           cryptType: "2",
           body: "u9su4Mi92g8b2l1GjBEllZQBpjFxRbKYY4MNjgS7qyQBNWCWEZXEbMnMlogzkQ4tnon1a091EAlH06KDvlx0YsX8/1WpbZQv6viwR1uOY6xVv1arURvbcnLcpbCMhJGDotn/YHohSxMUDzX4loPwHNejAcYLIF0+9u7tKCrYqY1+Ln9wYt3YeyjpIcjFmQdZyF/Whwfn+cc5YBy987agQpEZ9vhu8z109I8ibyx+/yiIVpnOTPunMA+T2lz7fhhNWoBzSJJujyoq4xWbM/6ZUikulgzv+FBpS0K2wcJ6DBrD+XdWkAx8CszTl/KSc0CoGfW9I7BhNceKc4M/K2GkMS8h8T9h6s28WWpqz8RcSbf3/7+GSpn9m2nldvtOIC9mPC3Zn05mYSTh1e1k9gBZ/4jj5fTr3tr3uUxtBT4pv86dOArI5WnKrp0NOaBIXvcGwHk1F56g/1KY2rWKKBFUFYdG0onr8H+qQdc0jXlNxiovNZk8k2lTn0K4eqIIa/9hse8O4M4uaTaZfumcjDj2fRyqcT0rjprTWU2dpTYc6M/SftB+nO/KvFpo8tY7f3CLk45iZW4ORPiBkzHoTt8iTr4ua5e0w7AHGIOf8srvNtVw71vmzbDMchogDgyQkdz1bCSCxEqmpOq99YqCltiX1I9rYcjcSsLOteZhXM2i3Mk="
@@ -28,7 +26,7 @@ export const useLoginEffect = () => {
         getUserInfo(userInfo)
       } else {
         cmbAppLogin(
-          (userInfo: CmbLoginData) => {
+          (userInfo: Cmb.CmbLoginData) => {
             getUserInfo(userInfo)
               .then((response: boolean) => {
                 resolve('登陆成功')
@@ -48,7 +46,7 @@ export const useLoginEffect = () => {
   }
 
   /** 获取用户信息 */
-  const getUserInfo = (userInfo: CmbLoginData) => {
+  const getUserInfo = (userInfo: Cmb.CmbLoginData) => {
     return new Promise<boolean>((resolve, reject) => {
       Login({ sResponseXml: JSON.stringify(userInfo) })
         .then(res => {
@@ -66,7 +64,7 @@ export const useLoginEffect = () => {
               //     expandUserID,
               //     uniqueUserID,
               //     timeStamp
-              //   } = JSON.parse(param) as LoginDataParam
+              //   } = JSON.parse(param) as Res.LoginDataParam
               //   console.log('羊毛党param: ', param)
               //   // 羊毛党接口
               //   cmblapi.merchantOpenAPI({

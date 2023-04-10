@@ -2,13 +2,12 @@
  * @Author: dushuai
  * @Date: 2023-03-14 17:53:45
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-03 14:49:32
+ * @LastEditTime: 2023-04-10 16:26:08
  * @description: axios
  */
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import qs from 'qs'
 import { useAppStore } from '@/stores/app'
-import type { ResponseRes } from '@/typings/response'
 import { cancelRequest } from './requestCancel'
 import ErrorCodeHandle from './requestCode'
 
@@ -75,8 +74,8 @@ service.interceptors.response.use(
  * 基础的请求
 */
 /** POST表单格式 */
-export function post<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
-  return new Promise<ResponseRes<T>>((resolve, reject) => {
+export function post<T = any>(url: string, params?: object): Promise<Res.ResponseRes<T>> {
+  return new Promise<Res.ResponseRes<T>>((resolve, reject) => {
     service
       .post(url, qs.stringify(params), {
         headers: {
@@ -84,7 +83,7 @@ export function post<T = any>(url: string, params?: object): Promise<ResponseRes
         }
       })
       .then(
-        (response: AxiosResponse<ResponseRes<T>>) => {
+        (response: AxiosResponse<Res.ResponseRes<T>>) => {
           response && resolve(response.data)
         },
         (err: AxiosError) => {
@@ -98,12 +97,12 @@ export function post<T = any>(url: string, params?: object): Promise<ResponseRes
 }
 
 /** POST JSON格式 */
-export function postJSON<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
-  return new Promise<ResponseRes<T>>((resolve, reject) => {
+export function postJSON<T = any>(url: string, params?: object): Promise<Res.ResponseRes<T>> {
+  return new Promise<Res.ResponseRes<T>>((resolve, reject) => {
     service
       .post(url, params)
       .then(
-        (response: AxiosResponse<ResponseRes<T>>) => {
+        (response: AxiosResponse<Res.ResponseRes<T>>) => {
           response && resolve(response.data)
         },
         (err: AxiosError) => {
@@ -117,12 +116,12 @@ export function postJSON<T = any>(url: string, params?: object): Promise<Respons
 }
 
 /** GET请求 */
-export function get<T = any>(url: string, params?: object): Promise<ResponseRes<T>> {
-  return new Promise<ResponseRes<T>>((resolve, reject) => {
+export function get<T = any>(url: string, params?: object): Promise<Res.ResponseRes<T>> {
+  return new Promise<Res.ResponseRes<T>>((resolve, reject) => {
     service
       .get(url, { params })
       .then(
-        (response: AxiosResponse<ResponseRes<T>>) => {
+        (response: AxiosResponse<Res.ResponseRes<T>>) => {
           response && resolve(response.data)
         },
         (err: AxiosError) => {
