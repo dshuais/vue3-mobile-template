@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-07 17:59:50
+ * @LastEditTime: 2023-04-10 14:53:14
  * @description: 框架说明
 -->
 # 项目名称
@@ -33,17 +33,20 @@
 │     └─img            	          静态图片文件目录
 │     └─resource                  序列帧文件目录
 │  └─axios            	          封装axios请求
+|     └─requestCancel             重复请求取消方法文件
 │  └─common            	          公共文件
 │     └─style            	      公共样式文件目录
 |     └─ts                        公共函数的目录
 │  └─components                   符合vue组件规范的组件目录
 │     └─BaseComponents            基础组件目录
+│         └─BaseLoading.vue       静态资源预加载组件
 │     └─Popups                    弹窗组件目录
-│         └─popBase               弹窗组件使用实例
-│  └─enum                         公共枚举文件目录
+│         └─popBase.vue           弹窗组件使用实例
+│  └─enum                         枚举文件目录
 │  └─hooks                        抽离hooks的文件目录
 │     └─useLogin                  抽离登录方法
 │     └─usePopups                 弹窗统一管理方法的hooks
+│     └─useToast                  toast提示的hooks
 │  └─router                       路由文件
 │  └─stores                       状态管理仓库（pinia）文件目录
 |     └─app.ts                    存放app内状态state的文件
@@ -56,8 +59,10 @@
 │  └─utils                        常用的工具类函数文件目录
 |     └─cmbUtil.ts                cmb常用api
 |     └─is.ts                     is类型推断
+|     └─router.ts                 重写路由跳转
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录
+|     └─index.vue                 首页
 │  └─App.vue                      App根文件
 │  └─auto-imports.d.ts            按需加载api自动生成文件（勿改）
 │  └─components.d.ts              按需加载组件自动生成文件（勿改）
@@ -68,8 +73,8 @@
 |─.eslintrc.cjs                   ESLint规则
 │─env.d.ts                        自定义npm上没有声明文件包的声明文件
 │─index.html
-│─package-lock.json
 │─package.json
+│─pnpm-lock.yaml
 ├─README.md                       项目信息
 ├─tsconfig.json                   ts配置文件
 ├─tsconfig.app.json               ts配置文件，会覆盖tsconfig
