@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:52:49
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 15:08:02
+ * @LastEditTime: 2023-04-10 10:45:53
  * @description: 工具方法
  */
 
@@ -158,4 +158,30 @@ export const getEnumKey = <R extends string, T extends { [key: string]: R }>(enu
   if (keys.length < 0) return ''
   const key = keys.filter(k => enumObj[k] === val)
   return key.length > 0 ? key[0] : ''
+}
+
+/**
+ * 复制方法
+ * @param {string} text 要复制的内容
+ * @param {boolean} origin 通过什么类型复制 input:false复制内容在一行 textarea:true可换行 可选，默认textarea
+ * @returns {Promise<boolean>} 是否复制成功
+ */
+export const $copy = (text: string, origin: boolean = true): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    let input: HTMLInputElement | HTMLTextAreaElement
+    if (origin) input = document.createElement('textarea')
+    else input = document.createElement('input')
+
+    input.setAttribute('readonly', 'readonly')
+    input.value = text
+    document.body.appendChild(input)
+    input.select()
+    if (document.execCommand('copy')) {
+      document.execCommand('copy')
+      resolve(true)
+    } else {
+      reject(false)
+    }
+    document.body.removeChild(input)
+  })
 }

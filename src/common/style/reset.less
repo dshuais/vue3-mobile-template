@@ -212,13 +212,19 @@ li {
   list-style: none;
 }
 
+// 重写popup样式
 .van-popup {
   min-width: 100%;
-  // height: 100vh; // 可以设置弹窗居中的话注释height
+  // height: 100vh; // 可以设置弹窗居中的话 注释height,van-popup--center会设置垂直居中
   background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+// 因为vant4 toast公用了popup样式 所以再重写toast覆盖popup样式
+.van-toast {
+  background: var(--van-toast-background);
+  min-width: var(--van-toast-text-min-width);
 }
 
 // 小手点击涟漪效果

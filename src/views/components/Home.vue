@@ -2,14 +2,16 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-07 16:44:31
+ * @LastEditTime: 2023-04-10 12:08:24
  * @description: 首页 --> 页面组件
 -->
 <script setup lang='ts'>
 import { GetCaptcha } from '@/api/api';
 import { Pages, Popups } from '@/enums/app';
 import { usePopups } from '@/hooks/usePopups';
+import { useToast } from '@/hooks/useToast';
 import { useAppStore } from '@/stores/app';
+import { $copy } from '@/utils';
 import { redirect, to } from '@/utils/router';
 
 const { popShow, closeOtherPop, openPopups } = usePopups()
@@ -23,18 +25,31 @@ const handleShowPop = () => {
   popShow(Popups.popBase)
 }
 
+const captchaImg = ref<string>('')
 const handleCaptcha = () => {
   GetCaptcha()
     .then(res => {
       console.log('res', res)
       if (res.code === 200) {
         // console.log('res.data', res.data.captchaImg)
+        captchaImg.value = res.data.captchaImg
       } else {
         console.log('res', res)
       }
     })
     .catch(err => {
       console.log('err', err)
+    })
+}
+
+const { $msg } = useToast()
+const handleCopy = () => {
+  $copy(captchaImg.value)
+    .then(res => {
+      $msg('复制成功')
+    })
+    .catch(err => {
+      $msg('复制失败')
     })
 }
 
@@ -52,12 +67,14 @@ onMounted(() => {
 
   <van-button type="primary" @click="handleCaptcha">请求接口</van-button>
 
+  <van-button type="primary" @click="handleCopy">复制</van-button>
+
 
   <PopBase ref="refPopBase" />
 
   <div v-for="(item, ind) in openPopups" :key="ind">当前打开的弹窗：map {{ item[0] }}</div>
 
-  <div style="background-color: red;">
+  <div style="background-color: rgba(255, 0, 0, .1);">
     <div class="ripple-circle"></div>
     <div class="hand"></div>
   </div>
