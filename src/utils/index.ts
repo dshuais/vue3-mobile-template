@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:52:49
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-10 10:45:53
+ * @LastEditTime: 2023-04-14 18:41:03
  * @description: 工具方法
  */
 
@@ -185,3 +185,14 @@ export const $copy = (text: string, origin: boolean = true): Promise<boolean> =>
     document.body.removeChild(input)
   })
 }
+
+/**
+ * 获取图片路径
+ * @param {string} name 图片名称，绝对与assets/img/文件夹
+ * @returns {string} 图片的绝对路径
+ * @Readmore https://vitejs.cn/guide/assets.html#new-url-url-import-meta-url
+ */
+export const getImageUrl = (name: string): string => {
+  return new URL(`../assets/img/${name}`, import.meta.url).href
+}
+
