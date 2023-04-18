@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:52:49
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-14 18:41:03
+ * @LastEditTime: 2023-04-18 17:51:28
  * @description: 工具方法
  */
 
@@ -196,3 +196,37 @@ export const getImageUrl = (name: string): string => {
   return new URL(`../assets/img/${name}`, import.meta.url).href
 }
 
+/** 
+ * 页面滚动
+ * @param {string} id 滚动的参照标准domId
+ * @param {number} duration 滚动时间 可选，默认5毫秒
+ * @param {number} offset 安全范围，范围内不进行滚动 可选，默认10
+ */
+export const scrollPageTo = (id: string, duration: number = 500, offset: number = 10): void => {
+  const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+  const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
+  const activeItem: HTMLElement = document.getElementById(id) as HTMLElement
+  const totalScrollDistance: number = activeItem.offsetTop
+  const scrollTop: number = document.getElementById('app')!.scrollTop
+  const isDown: boolean = scrollTop <= totalScrollDistance
+  let scrollY: number = scrollTop,
+    oldTimestamp: number | null = null
+  if ((scrollTop - totalScrollDistance <= offset && scrollTop - totalScrollDistance >= 0) ||
+    (totalScrollDistance - scrollTop <= offset && totalScrollDistance - scrollTop >= 0)) return
+
+  function step(newTimestamp: number): void {
+    if (oldTimestamp !== null) {
+      if (scrollY <= totalScrollDistance && isDown) {
+        scrollY += (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
+      } else if (scrollY > totalScrollDistance && !isDown) {
+        scrollY -= (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
+      }
+      document.getElementById('app')!.scrollTop = scrollY
+    }
+    if ((scrollY <= totalScrollDistance && isDown) || (scrollY >= totalScrollDistance && !isDown)) {
+      oldTimestamp = newTimestamp
+      requestAnimationFrame(step)
+    }
+  }
+  requestAnimationFrame(step)
+}

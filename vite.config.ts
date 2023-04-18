@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-27 11:03:36
+ * @LastEditTime: 2023-04-18 17:52:39
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -24,6 +24,7 @@ export default defineConfig(({ mode, command }) => {
   const isSit: boolean = env.VITE_APP_ENV === 'sit'
   const isUat: boolean = env.VITE_APP_ENV === 'uat'
   const isHideLog: boolean = env.VITE_APP_LOG === 'true'
+  const isTiny: boolean = env.VITE_APP_TINY === 'true'
 
   // 非本地环境删除dist文件夹
   if (!isDev) {
@@ -130,7 +131,7 @@ export default defineConfig(({ mode, command }) => {
       }),
 
       // 生产环境下开启图片压缩
-      isProd && viteImagemin({
+      isProd && isTiny && viteImagemin({
         gifsicle: {
           optimizationLevel: 7,
           interlaced: false
@@ -189,8 +190,10 @@ export default defineConfig(({ mode, command }) => {
           entryFileNames: 'assets/js/[name]-[hash].js',
           assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
           manualChunks(id) { // 超大静态资源拆分
-            if (id.includes('node_modules')) return id.toString().split('node_modules/')[1].split('/')[0].toString()
-            // 'popups': ['./src/components/Popups/']
+            if (id.includes('node_modules')) {
+              const list = id.toString().split('node_modules/')
+              return list[list.length - 1].split('/')[0].toString()
+            }
           }
         }
       }

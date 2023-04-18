@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-11 14:47:34
+ * @LastEditTime: 2023-04-18 17:58:41
  * @description: 框架说明
 -->
 # 项目名称
@@ -39,6 +39,7 @@ npm run dev
 3. `auto-imports.d.ts`、`components.d.ts` 为按需加载（vue、vue-router、pinia、components下组件）自动生成文件，请勿修改且在代码内不要重复导入
 4. `node_modules` 、`mobile` 等非源码文件勿提交到SVN/git，可添加到SVN/git的ignore/.gitignore列表中
 5. 对弹框进行统一管理，弹框组件请根据`/src/components/Popups/popBase.vue`、`/src/hooks/usePopups.ts`内提示使用
+6. 项目内已引入`vite-plugin-imagemin`图片压缩工具，默认在`uat`、`production`环境下开启。注：开启后打包时间会比较长（126张图片将近两分钟），可在配置项`VITE_APP_TINY`关闭，自行在`https://tinypng.com`压缩
 
 ## 目录结构
 
@@ -49,7 +50,7 @@ npm run dev
 │  └─api          	              业务请求接口
 │  └─assets            	          存放应用引用的本地静态资源（如图片、序列帧等）的目录
 │     └─img            	          静态图片文件目录
-│     └─resource                  序列帧文件目录
+│     └─style                     样式文件目录
 │  └─axios            	          封装axios请求
 |     └─requestCancel.ts          重复请求取消方法
 |     └─requestCode.ts            统一处理请求状态码方法
@@ -75,6 +76,7 @@ npm run dev
 |     └─app.d.ts                  app内数据类型
 |     └─cmb.d.ts                  cmb request/response的数据结构类型定义文件
 |     └─env.d.ts                  自定义npm上没有声明文件包的声明文件
+|     └─global.d.ts               全局window上数据类型
 |     └─request.d.ts              请求的request的数据结构类型定义文件
 |     └─response.d.ts             请求的response.data.data的数据结构类型定义文件
 │  └─utils                        常用的工具类函数文件目录
@@ -128,6 +130,9 @@ VITE_APP_BASE_URL = "xxx"
 
 #是否开启Vconsole（生产环境关闭）
 VITE_APP_VCONSOLE_ABLED = "false"
+
+#是否开启图片压缩（生产环境打开）
+VITE_APP_TINY = "true"
 
 #活动短链
 VITE_APP_CHAIN = "xxx"
