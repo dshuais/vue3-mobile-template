@@ -197,16 +197,15 @@ export const getImageUrl = (name: string): string => {
 }
 
 /** 
- * 页面滚动
- * @param {string} id 滚动的参照标准domId
- * @param {number} duration 滚动时间 可选，默认5毫秒
+ * 页面滚动 等同于element.scrollTo()
+ * @param {number} totalScrollDistance 将要滚动到的 距离顶部的距离
+ * @param {number} duration 滚动时间 可选，默认2.5毫秒
  * @param {number} offset 安全范围，范围内不进行滚动 可选，默认10
  */
-export const scrollPageTo = (id: string, duration: number = 500, offset: number = 10): void => {
+export const scrollPageTo = (totalScrollDistance: number, duration: number = 250, offset: number = 10): void => {
   const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
   const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
-  const activeItem: HTMLElement = document.getElementById(id) as HTMLElement
-  const totalScrollDistance: number = activeItem.offsetTop
+
   const scrollTop: number = document.getElementById('app')!.scrollTop
   const isDown: boolean = scrollTop <= totalScrollDistance
   let scrollY: number = scrollTop,
@@ -215,6 +214,7 @@ export const scrollPageTo = (id: string, duration: number = 500, offset: number 
     (totalScrollDistance - scrollTop <= offset && totalScrollDistance - scrollTop >= 0)) return
 
   function step(newTimestamp: number): void {
+    console.log('step', newTimestamp)
     if (oldTimestamp !== null) {
       if (scrollY <= totalScrollDistance && isDown) {
         scrollY += (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
