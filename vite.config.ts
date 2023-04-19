@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-18 17:52:39
+ * @LastEditTime: 2023-04-19 09:49:19
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -34,7 +34,7 @@ export default defineConfig(({ mode, command }) => {
       if (fs.existsSync(path)) {
         files = fs.readdirSync(path)
         files.forEach(file => {
-          let curPath = path + '/' + file
+          let curPath: string = path + '/' + file
           // 判断是否是文件夹
           if (fs.statSync(curPath).isDirectory()) {
             delDir(curPath) //递归删除文件夹
@@ -74,10 +74,10 @@ export default defineConfig(({ mode, command }) => {
       let h: string = time.getHours().toString()
       let mm: string = time.getMinutes().toString()
       let ss: string = time.getSeconds().toString()
-      m = m < '10' ? `0${m}` : m
-      d = d < '10' ? `0${d}` : d
-      h = h < '10' ? `0${h}` : h
-      mm = mm < '10' ? `0${mm}` : mm
+      m = Number(m) < 10 ? `0${m}` : m
+      d = Number(d) < 10 ? `0${d}` : d
+      h = Number(h) < 10 ? `0${h}` : h
+      mm = Number(mm) < 10 ? `0${mm}` : mm
       return `${y}${m}${d}${h}${mm}${ss}`
     }
     const dirName = formatDate()

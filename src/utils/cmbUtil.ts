@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-24 10:57:28
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-10 16:30:33
+ * @LastEditTime: 2023-04-19 09:38:02
  * @description: 二次封装常用招行api
  */
 
@@ -17,14 +17,14 @@ import { formatDate, randomString } from './index'
  */
 export const cmbAppLogin = (success: Function, fail: Function) => {
   const corpNo: string = import.meta.env.VITE_APP_CORPNO, // 商户号
-    timeStamp: string = formatDate(new Date(), 'yyyyMMddHHmmss'), // 时间
+    timestamp: string = formatDate(new Date(), 'yyyyMMddHHmmss'), // 时间
     nonceStr: string = randomString(), // 随机字符串
-    sign: string = md5(`${corpNo}${timeStamp}${nonceStr}${import.meta.env.VITE_APP_KEY}`) // 签名
+    sign: string = md5(`${corpNo}${timestamp}${nonceStr}${import.meta.env.VITE_APP_KEY}`) // 签名
   cmblapi.merchantLogin({
     corpNo,
     reAuth: false, // 是否需要重新授权，如果用户已同意设置该参数无效
     authInfo: {
-      timeStamp,
+      timestamp,
       nonceStr,
       sign
     },
@@ -42,7 +42,7 @@ export const cmbAppLogin = (success: Function, fail: Function) => {
  * @param {string} url 跳转链接
  */
 export const cmbAppPushWindow = (url: string) => {
-  if (process.env.NODE_ENV === 'development') return console.log('跳转链接', url)
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('跳转链接', url)
   if (
     url.indexOf('cmbls/functionjump') > -1 ||
     url.indexOf('cmbls/FunctionJump') > -1 ||
@@ -81,7 +81,7 @@ export const cmbAppPushWindow = (url: string) => {
  * @param {string} url 跳转链接 
  */
 export const cmbAppJumpLink = (url: string) => {
-  if (process.env.NODE_ENV === 'development') return console.log('跳转链接', url)
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('跳转链接', url)
   if (
     url.indexOf('cmbls/functionjump') > -1 ||
     url.indexOf('cmbls/FunctionJump') > -1 ||
@@ -126,7 +126,7 @@ export const cmbAppPopWindow = () => {
  * @param {CmbOnpageShow} obj 页面监听的事件、有效期、成功、失败、触发等回调对象
  */
 export const cmbAppOnpageShow = (obj: Cmb.CmbOnpageShow) => {
-  if (process.env.NODE_ENV === 'development') return console.log('开启页面监听')
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('开启页面监听')
   let {
     eventName = 'onPageShow', // onLoginSuccess 用户登录成功 onPageShow 当前页面曝光显示  onPageHide	当前页面隐藏(注意：如果是关闭浏览器窗不会收到该事件，可以用 HTML onunload事件属性)或压入后台 onLogoutSuccess 用户登出成功
     constant = false, // 监听是否一直有效 true: 持续有效 false: 一次有效
@@ -176,7 +176,7 @@ export const cmbAppCalendarReminder = (remindObj: Cmb.CmbCalendarReminder = {}) 
  * @param {CmbShareInfo} obj 分享类型、渠道、参数、回调等
  */
 export const cmbAppShareInfoWithUI = (obj: Cmb.CmbShareInfo) => {
-  if (process.env.NODE_ENV === 'development') return console.log('调用招行分享接口', obj)
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('调用招行分享接口', obj)
   let {
     type = 'url', // url: 网页分享 image: 纯图片分享 text: 纯文本分享
     channelList = ['weixinsession', 'weixintimeline', 'weibo', 'qqsession'],
@@ -207,7 +207,7 @@ export const cmbAppShareInfoWithUI = (obj: Cmb.CmbShareInfo) => {
  * @param {CmbSaveImage} obj 保存的图片(base64)、回调等
  */
 export const cmbAppSaveImageToAlbum = (obj: Cmb.CmbSaveImage) => {
-  if (process.env.NODE_ENV === 'development') return console.log('调用招行保存图片接口')
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('调用招行保存图片接口')
   let {
     picData = '', // 需要保存的图片内容字符串（base64编码）
     success = function (res: any) {
@@ -244,7 +244,7 @@ export const cmbAppSaveImageToAlbum = (obj: Cmb.CmbSaveImage) => {
 * @Remd more https://open.cloud.cmbchina.com/#/apistoredetail?tabname=apistore&catid=5&catname=%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E7%B1%BB&pkid=c244ef4e-5792-48c4-bdcc-e5bdcde944a4
  */
 export const cmbAppChooseImage = (obj: Cmb.CmbChooseImage) => {
-  if (process.env.NODE_ENV === 'development') return console.log('调用招行拍照接口')
+  if (import.meta.env.VITE_NODE_ENV === 'development') return console.log('调用招行拍照接口')
   let {
     action = 'default', // default相册/相机 album相册 camera相机 portrait人脸相机 imageClip相册或者相机并裁剪
     params = {
