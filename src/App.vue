@@ -2,14 +2,14 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-03 16:43:10
+ * @LastEditTime: 2023-04-19 10:13:27
  * @description: App
 -->
 <script setup lang="ts">
 import { usePopups } from './hooks/usePopups';
 import { usePopupsStore } from './stores/popups';
 
-// 配置项目标题和meta 利于seo
+// 配置项目标题和meta
 useHead({
   title: import.meta.env.VITE_APP_TITLE,
   // meta: [
