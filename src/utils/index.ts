@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:52:49
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-18 17:51:28
+ * @LastEditTime: 2023-04-19 16:13:19
  * @description: 工具方法
  */
 
@@ -198,27 +198,30 @@ export const getImageUrl = (name: string): string => {
 
 /** 
  * 页面滚动 等同于element.scrollTo()
- * @param {number} totalScrollDistance 将要滚动到的 距离顶部的距离
+ * @param {number} scroll 将要滚动到的 距离顶部的距离
  * @param {number} duration 滚动时间 可选，默认2.5毫秒
  * @param {number} offset 安全范围，范围内不进行滚动 可选，默认10
  */
-export const scrollPageTo = (totalScrollDistance: number, duration: number = 250, offset: number = 10): void => {
+export const scrollPageTo = (scroll: number, duration: number = 250, offset: number = 10): void => {
   const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
   const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
+  const scale: number = document.body.clientWidth / 375
 
+  const totalScrollDistance: number = scroll * scale
   const scrollTop: number = document.getElementById('app')!.scrollTop
   const isDown: boolean = scrollTop <= totalScrollDistance
   let scrollY: number = scrollTop,
     oldTimestamp: number | null = null
+
   if ((scrollTop - totalScrollDistance <= offset && scrollTop - totalScrollDistance >= 0) ||
     (totalScrollDistance - scrollTop <= offset && totalScrollDistance - scrollTop >= 0)) return
 
   function step(newTimestamp: number): void {
     if (oldTimestamp !== null) {
       if (scrollY <= totalScrollDistance && isDown) {
-        scrollY += (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
+        scrollY += (totalScrollDistance - scrollTop) / duration * (newTimestamp - oldTimestamp)
       } else if (scrollY > totalScrollDistance && !isDown) {
-        scrollY -= (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
+        scrollY -= (scrollTop - totalScrollDistance) / duration * (newTimestamp - oldTimestamp)
       }
       document.getElementById('app')!.scrollTop = scrollY
     }
