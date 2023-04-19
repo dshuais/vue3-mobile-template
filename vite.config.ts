@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-19 09:49:19
+ * @LastEditTime: 2023-04-19 09:53:49
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -66,7 +66,7 @@ export default defineConfig(({ mode, command }) => {
   // 生产/预生产使用时间戳
   if (isProd || isUat) {
     // 前端打包解决缓存问题
-    const formatDate = () => {
+    const formatDate = (): string => {
       const time: Date = new Date()
       let y: string = time.getFullYear().toString()
       let m: string = (time.getMonth() + 1).toString()
@@ -80,7 +80,7 @@ export default defineConfig(({ mode, command }) => {
       mm = Number(mm) < 10 ? `0${mm}` : mm
       return `${y}${m}${d}${h}${mm}${ss}`
     }
-    const dirName = formatDate()
+    const dirName: string = formatDate()
     publicPath = `${env.VITE_APP_RESOURCE_URL}${dirName}`
     if (isProd || isUat) {
       outputDir = `./mobile/${dirName}`
