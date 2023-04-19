@@ -214,7 +214,6 @@ export const scrollPageTo = (totalScrollDistance: number, duration: number = 250
     (totalScrollDistance - scrollTop <= offset && totalScrollDistance - scrollTop >= 0)) return
 
   function step(newTimestamp: number): void {
-    console.log('step', newTimestamp)
     if (oldTimestamp !== null) {
       if (scrollY <= totalScrollDistance && isDown) {
         scrollY += (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
