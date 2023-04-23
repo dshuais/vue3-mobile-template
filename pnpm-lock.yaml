@@ -96,6 +96,9 @@ devDependencies:
   postcss-plugin-px2rem:
     specifier: ^0.8.1
     version: 0.8.1
+  postcss-pxtorem:
+    specifier: ^6.0.0
+    version: 6.0.0(postcss@8.4.21)
   regenerator-runtime:
     specifier: ^0.13.11
     version: 0.13.11
@@ -1691,13 +1694,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.37.0
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint@8.37.0:
     resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: true
 
@@ -5888,6 +5891,14 @@ packages:
     resolution: {integrity: sha512-gNxhrnR57pnGrPLLqVNWY9+BWgj46kYkphw+0gpRJf9tjgwI7/tLqQPK7KdlksB2SSAddOb11otDVwri8b8mXw==}
     dependencies:
       postcss: 5.2.18
+    dev: true
+
+  /postcss-pxtorem@6.0.0(postcss@8.4.21):
+    resolution: {integrity: sha512-ZRXrD7MLLjLk2RNGV6UA4f5Y7gy+a/j1EqjAfp9NdcNYVjUMvg5HTYduTjSkKBkRkfqbg/iKrjMO70V4g1LZeg==}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.21
     dev: true
 
   /postcss-selector-parser@6.0.11:

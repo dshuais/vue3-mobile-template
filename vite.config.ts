@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-19 09:53:49
+ * @LastEditTime: 2023-04-23 11:19:04
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -231,10 +231,10 @@ export default defineConfig(({ mode, command }) => {
           additionalData: '@import "./src/assets/style/global.less";'
         }
       },
-      // px 转 rem
+      // px 转 rem  postcss-plugin-px2rem || postcss-pxtorem
       postcss: {
         plugins: [
-          require('postcss-plugin-px2rem')({
+          require('postcss-pxtorem')({
             rootValue: 100,
             unitPrecision: 5, //保留rem小数点多少位
             propList: ['*'],
