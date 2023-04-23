@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-23 10:28:48
+ * @LastEditTime: 2023-04-23 17:21:10
  * @description: 框架说明
 -->
 # 项目名称
@@ -86,6 +86,7 @@ pnpm run dev
 |     └─router.ts                 重写路由跳转
 │  └─views                        路由对应vue文件目录
 |     └─components                抽分页面组件文件目录
+|         └─Home                  首页页面组件
 |     └─index.vue                 首页
 │  └─App.vue                      App根文件
 │  └─auto-imports.d.ts            按需加载api自动生成文件（勿改）

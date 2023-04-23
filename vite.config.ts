@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-23 11:19:04
+ * @LastEditTime: 2023-04-23 17:21:44
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -231,7 +231,7 @@ export default defineConfig(({ mode, command }) => {
           additionalData: '@import "./src/assets/style/global.less";'
         }
       },
-      // px 转 rem  postcss-plugin-px2rem || postcss-pxtorem
+      // px 转 rem  postcss-plugin-px2rem(81.3k) || postcss-pxtorem(3.6k)
       postcss: {
         plugins: [
           require('postcss-pxtorem')({
