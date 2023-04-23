@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-14 11:32:51
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-11 11:59:20
+ * @LastEditTime: 2023-04-23 10:27:55
  * @description: Index
 -->
 <script setup lang="ts">
@@ -79,10 +79,7 @@ watchEffect(() => {
     })
   } else {
     if (isMpbankEnv || isDevEnv) {
-      setTimeout(() => {
-        token.value = 'test-token=123456'
-      }, 1000)
-      // login() // 招行登录
+      login() // 招行登录
     } else {
       nextTick(() => {
         createWechatPromiseAll()

@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-17 09:30:38
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-18 17:58:41
+ * @LastEditTime: 2023-04-23 10:28:48
  * @description: 框架说明
 -->
 # 项目名称
@@ -23,7 +23,7 @@ pnpm install
 
 #### 运行
 ```
-npm run dev
+pnpm run dev
 ```
 
 #### 打包
@@ -159,13 +159,13 @@ VITE_APP_TITLE = "项目名称"
 ## 运行以及打包
 
 ```
-npm run dev    本地启动项目
+pnpm run dev    本地启动项目
 
-npm run sit    测试环境打包
+pnpm run sit    测试环境打包
 
-npm run uat    预生产环境打包
+pnpm run uat    预生产环境打包
 
-npm run prod   生成环境打包
+pnpm run prod   生成环境打包
 
-npm run getImg 自动加载assets/img/下静态图片（图片懒加载使用），环境打包命令会自动执行,无需重复执行
+pnpm run getImg 自动加载assets/img/下静态图片（图片懒加载使用），环境打包命令会自动执行,无需重复执行
 ```

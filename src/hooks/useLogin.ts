@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:06:16
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-10 16:32:56
+ * @LastEditTime: 2023-04-23 10:28:19
  * @description: 抽离app登录逻辑hooks
  */
 import cmblapi from 'cmblapi'
@@ -18,6 +18,9 @@ export const useLoginEffect = () => {
   const login = () => {
     return new Promise<string>((resolve, reject) => {
       if (import.meta.env.VITE_NODE_ENV === 'development') {
+        return setTimeout(() => {
+          useAppActions().SET_TOKEN('test-token=123456')
+        }, 1000)
         let userInfo: Cmb.CmbLoginData = {
           resultType: "Y",
           cryptType: "2",
