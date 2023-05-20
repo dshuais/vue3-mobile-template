@@ -17,10 +17,15 @@
         "./src/*"
       ]
     },
+    "module": "es2022",
+    "moduleResolution": "Node"
   },
   "include": [
-  //   "src/auto-imports.d.ts",
-  //   "src/components.d.ts"
+    "src/typings/env.d.ts",
+    "src/**/*.d.ts",
+    "src/auto-imports.d.ts",
+    "src/components.d.ts",
+    "src/componentInstance.d.ts",
   ],
   // 因为自动获取静态图片列表需要使用ts-node运行,解决可能会有的报错
   "ts-node": {
