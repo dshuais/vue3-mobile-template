@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-23 17:21:44
+ * @LastEditTime: 2023-10-25 18:19:03
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -15,6 +15,7 @@ import viteCompression from 'vite-plugin-compression'
 import viteImagemin from 'vite-plugin-imagemin'
 import legacyPlugin from '@vitejs/plugin-legacy'
 import visualizer from 'rollup-plugin-visualizer'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
@@ -96,6 +97,8 @@ export default defineConfig(({ mode, command }) => {
     // publicDir: 'public', // 静态资源服务的文件夹 默认public
     plugins: [
       vue(),
+
+      vueJsx(),
 
       // 插件自动按需引入
       AutoImport({
