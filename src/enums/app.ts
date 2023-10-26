@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-19 19:00:26
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-30 17:27:16
+ * @LastEditTime: 2023-10-25 18:23:07
  * @Description: 枚举文件
  */
 
@@ -15,4 +15,5 @@ export enum Pages {
 /** 弹窗枚举 */
 export enum Popups {
   popBase = 'refPopBase', // 弹框示例
+  popBaseJsx = 'refPopBaseJsx', // 弹框示例
 }

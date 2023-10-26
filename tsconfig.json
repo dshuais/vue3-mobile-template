@@ -18,7 +18,10 @@
       ]
     },
     "module": "es2022",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
   },
   "include": [
     "src/typings/env.d.ts",
