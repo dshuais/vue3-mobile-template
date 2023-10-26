@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-26 15:37:34
+ * @LastEditTime: 2023-10-26 18:07:08
  * @description: 首页 --> 页面组件
 -->
 
@@ -15,6 +15,7 @@ import { useAppStore } from '@/stores/app';
 import { $copy } from '@/utils';
 import { redirect, to } from '@/utils/router';
 import PopBaseJsx from '@/components/Popups/PopBaseJsx'
+import { divide } from 'lodash';
 
 const { popShow, closeOtherPop, openPopups } = usePopups()
 const handleJump = () => {
@@ -84,7 +85,10 @@ onMounted(() => {
 
 
   <PopBase ref="refPopBase" />
-  <PopBaseJsx ref="refPopBaseJsx" :message="jsxMsg" @close="closePopBaseJsx" />
+  <PopBaseJsx ref="refPopBaseJsx" :message="jsxMsg" @close="closePopBaseJsx">
+    <div>我是正宗的默认插槽</div>
+    <template v-slot:title="{ title }">我是正宗的{{ title }}插槽</template>
+  </PopBaseJsx>
 
   <div v-for="(item, ind) in openPopups" :key="ind">当前打开的弹窗：map {{ item[0] }}</div>
 
