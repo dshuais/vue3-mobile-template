@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-25 18:19:03
+ * @LastEditTime: 2023-10-26 15:45:40
  * @description: vite.config
  */
 import { fileURLToPath, URL } from 'node:url'
@@ -227,6 +227,8 @@ export default defineConfig(({ mode, command }) => {
     },
     // css
     css: {
+      requireModuleExtension: true,
+
       // css预处理器
       preprocessorOptions: {
         less: {

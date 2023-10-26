@@ -21,7 +21,11 @@
     "moduleResolution": "Node",
     "jsx": "preserve",
     "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment"
+    "jsxFragmentFactory": "Fragment",
+    "jsxImportSource": "vue",
+    "plugins": [
+      {"name": "typescript-plugin-css-modules"}
+    ]
   },
   "include": [
     "src/typings/env.d.ts",

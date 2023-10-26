@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-20 09:33:25
  * @LastEditors: dushuai
- * @LastEditTime: 2023-04-10 16:32:03
+ * @LastEditTime: 2023-10-26 15:34:31
  * @description: ts类型文件
  */
 
@@ -22,6 +22,12 @@ declare namespace App {
   interface SetLoginStatus {
     key: string,
     val: boolean
+  }
+
+  /** jsx测试类型 */
+  type msg = {
+    code: number,
+    msg: string
   }
 
 }

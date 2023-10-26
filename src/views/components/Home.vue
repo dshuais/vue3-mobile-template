@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-26 09:57:34
+ * @LastEditTime: 2023-10-26 15:37:34
  * @description: 首页 --> 页面组件
 -->
 
@@ -56,6 +56,14 @@ const handleCopy = () => {
     })
 }
 
+const jsxMsg = ref<App.msg>({
+  code: 200, msg: '成功'
+})
+
+function closePopBaseJsx(msg: string) {
+  console.log('弹窗关闭了', msg)
+}
+
 onMounted(() => {
 
 })
@@ -76,7 +84,7 @@ onMounted(() => {
 
 
   <PopBase ref="refPopBase" />
-  <PopBaseJsx ref="refPopBaseJsx" />
+  <PopBaseJsx ref="refPopBaseJsx" :message="jsxMsg" @close="closePopBaseJsx" />
 
   <div v-for="(item, ind) in openPopups" :key="ind">当前打开的弹窗：map {{ item[0] }}</div>
 
@@ -107,3 +115,4 @@ onMounted(() => {
   }
 }
 </style>
+@/components/Popups/PopBaseJsx/PopBaseJsx@/components/Popups/PopBaseJsx
