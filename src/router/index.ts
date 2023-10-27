@@ -2,12 +2,12 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-03-27 16:29:31
+ * @LastEditTime: 2023-10-27 09:40:44
  * @description: vue-router
  */
 // import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Index from '../views/index.vue'
+import Index from '../views/index/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/game',
     name: 'Game',
-    component: () => import('@/views/game.vue')
+    component: () => import('@/views/game/index.vue')
   },
 ]
 
