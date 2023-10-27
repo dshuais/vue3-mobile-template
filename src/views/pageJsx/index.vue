@@ -2,12 +2,12 @@
  * @Author: dushuai
  * @Date: 2023-10-27 09:44:08
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-27 11:22:09
+ * @LastEditTime: 2023-10-27 17:04:49
  * @description: pageJsx页面
 -->
 <script setup lang='tsx'>
 import { Pages } from '@/enums/app'
-import css from './pageJsx.module.less'
+import styles from './pageJsx.module.less'
 import { to } from '@/utils/router'
 
 type List = {
@@ -28,9 +28,9 @@ function handleJump(page: keyof typeof Pages) {
 }
 
 const List = () =>
-  <div class={css.list}>
+  <div class={styles.list}>
     {list.value.map(item => (
-      <div key={item.id} class={css.item}>
+      <div key={item.id} class={styles.item}>
         {item.title}
         <van-button type="primary" onClick={() => handleJump(item.id < 3 ? 'Home' : 'Game')}>
           {item.id < 3 ? '回首页' : '去游戏页'}

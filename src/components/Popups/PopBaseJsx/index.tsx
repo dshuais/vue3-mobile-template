@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-10-25 18:20:47
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-26 18:09:03
+ * @LastEditTime: 2023-10-27 15:18:33
  * @description: jsx模板组件
  */
 import { Popups } from '@/enums/app' // 弹窗refName枚举
@@ -11,7 +11,7 @@ import { usePopups } from '@/hooks/usePopups' // 打开关闭弹窗的方法 ---
 import { useToast } from '@/hooks/useToast'
 import { Popup, Button } from 'vant';
 import type { PropType } from 'vue';
-import baseCss from './popBaseJsx.module.less'
+import styles from './popBaseJsx.module.less'
 
 /**
  * props参数类型
@@ -72,21 +72,21 @@ export default defineComponent({
       <van-popup v-model={[show.value, 'show']} duration={0.2} close-on-click-overlay={false}>
         <van-button type="primary" onClick={closeOtherPop}>关闭所有弹窗</van-button>
 
-        <div class={baseCss.container}>{props.message.code == 200 ? <Component /> : props.message.msg}</div>
+        <div class={styles.container}>{props.message.code == 200 ? <Component /> : props.message.msg}</div>
 
-        <div class={baseCss.main}></div>
+        <div class={styles.main}></div>
 
-        <div class={baseCss.count}>
+        <div class={styles.count}>
           <div>{count.value}</div>
           <van-button type="success" onClick={addCount}>++</van-button>
           <van-button type="danger" onClick={clearCount}>clear</van-button>
         </div>
 
-        {slots.default ? slots.default() : <div class={baseCss['title-default']}>我是默认插槽占位</div>}
+        {slots.default ? slots.default() : <div class={styles['title-default']}>我是默认插槽占位</div>}
 
         {slots.title ? slots.title({ title: 'TITLE' }) : <TitleComponent title='T-I-T-L-E' />}
 
-        <div class={baseCss.close} onClick={close}>xxxxxx</div>
+        <div class={styles.close} onClick={close}>xxxxxx</div>
       </van-popup>
     )
   }
@@ -103,7 +103,7 @@ type TitleProps = {
 }
 
 function TitleComponent(props: TitleProps) {
-  return <div class={baseCss['title-component']}>我是{props.title}插槽占位</div>
+  return <div class={styles['title-component']}>我是{props.title}插槽占位</div>
 }
 
 TitleComponent.props = {
