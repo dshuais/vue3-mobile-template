@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-13 15:45:54
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-27 09:40:44
+ * @LastEditTime: 2023-10-27 09:46:14
  * @description: vue-router
  */
 // import type { RouteRecordRaw } from 'vue-router'
@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/game',
     name: 'Game',
     component: () => import('@/views/game/index.vue')
+  },
+  {
+    path: '/jsx',
+    name: 'Jsx',
+    component: () => import('@/views/pageJsx/index.vue')
   },
 ]
 

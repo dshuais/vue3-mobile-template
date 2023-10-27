@@ -2,7 +2,7 @@
  * @Author: dushuai
  * @Date: 2023-03-21 16:03:27
  * @LastEditors: dushuai
- * @LastEditTime: 2023-10-26 18:07:08
+ * @LastEditTime: 2023-10-27 09:54:32
  * @description: 首页 --> 页面组件
 -->
 
@@ -15,16 +15,15 @@ import { useAppStore } from '@/stores/app';
 import { $copy } from '@/utils';
 import { redirect, to } from '@/utils/router';
 import PopBaseJsx from '@/components/Popups/PopBaseJsx'
-import { divide } from 'lodash';
 
 const { popShow, closeOtherPop, openPopups } = usePopups()
-const handleJump = () => {
-  to(Pages.Game)
+const handleJump = (page: keyof typeof Pages) => {
+  to(Pages[page])
 }
 
 const refPopBase = ref<ComponentInstance['PopBase']>()
 const refPopBaseJsx = ref<ComponentInstance['PopBaseJsx']>()
-const handleShowPop = (pop: string) => {
+const handleShowPop = (pop: keyof typeof Popups) => {
   // refPopBase.value?.popShow()
   popShow(Popups[pop])
 }
@@ -71,7 +70,9 @@ onMounted(() => {
 </script>
 <template>
   Home
-  <van-button type="primary" @click="handleJump">去游戏页</van-button>
+  <van-button type="primary" @click="handleJump('Game')">去游戏页</van-button>
+
+  <van-button type="primary" @click="handleJump('Jsx')">去Jsx页</van-button>
 
   <van-button type="primary" @click="handleShowPop('popBase')">打开弹窗</van-button>
 
