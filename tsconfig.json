@@ -23,9 +23,6 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "jsxImportSource": "vue",
-    "plugins": [
-      {"name": "typescript-plugin-css-modules"}
-    ]
   },
   "include": [
     "src/typings/env.d.ts",

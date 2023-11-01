@@ -28,8 +28,5 @@
     },
     "preserveValueImports": false, // 解决router内RouteRecordRaw报错: 同时启用了 "preserveValueImports" 和 "isolatedModules" 时，必须使用仅类型导入进行导入
     "suppressImplicitAnyIndexErrors": true, // 解决any|string...等不能用于索引的提示
-    "plugins": [
-      {"name": "typescript-plugin-css-modules"}
-    ]
   }
 }
